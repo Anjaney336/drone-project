@@ -527,6 +527,25 @@ class ProductStore:
         )
 
     @staticmethod
+    def _origin_summary(rows: list[dict]) -> tuple[str, dict[str, int]]:
+        """Describe what an aggregate is actually made of.
+
+        Aggregates used to hard-code `origin: demonstration` while counting every row
+        in the table, which mislabelled a mix of seeded and user data as pure demo
+        data. Reports the single origin when the rows are homogeneous, and "mixed"
+        with a per-origin breakdown when they are not.
+        """
+        counts: dict[str, int] = {}
+        for row in rows:
+            origin = str(row.get("origin") or "unavailable")
+            counts[origin] = counts.get(origin, 0) + 1
+        if not counts:
+            return "unavailable", {}
+        if len(counts) == 1:
+            return next(iter(counts)), counts
+        return "mixed", counts
+
+    @staticmethod
     def _rows(rows: list[sqlite3.Row]) -> list[dict[str, Any]]:
         return [dict(row) for row in rows]
 
@@ -547,6 +566,9 @@ class ProductStore:
                 ).fetchall()
             )
             actions = self.priority_queue(limit=5)
+            summary_origin, origin_counts = self._origin_summary(
+                self._rows(db.execute("SELECT origin FROM assets").fetchall())
+            )
             return {
                 "metrics": {
                     "total_assets": totals["total"],
@@ -558,7 +580,8 @@ class ProductStore:
                 },
                 "recent_findings": findings,
                 "action_queue": actions,
-                "origin": DataOrigin.DEMONSTRATION,
+                "origin": summary_origin,
+                "origins": origin_counts,
                 "source": DEMO_SOURCE,
                 "timestamp": DEMO_TIMESTAMP,
             }
@@ -835,6 +858,7 @@ class ProductStore:
                     params,
                 ).fetchall()
             )
+        region_origin, region_origin_counts = self._origin_summary(assets)
         return {
             "district": district or "All districts",
             "asset_count": len(assets),
@@ -846,7 +870,8 @@ class ProductStore:
             "priority_distribution": counts,
             "recurring_observations": observation_rows,
             "assets": assets,
-            "origin": DataOrigin.DEMONSTRATION,
+            "origin": region_origin,
+            "origins": region_origin_counts,
             "source": DEMO_SOURCE,
             "timestamp": DEMO_TIMESTAMP,
         }

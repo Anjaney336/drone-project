@@ -331,6 +331,22 @@ class AnalyzeRequest(BaseModel):
     model_key: str = "infrastructure_detection"
 
 
+def _media_origin(image_path: str) -> DataOrigin:
+    """A finding inherits the provenance of the medium it was computed from.
+
+    A model inference over a photograph a user uploaded is not a measurement, and
+    tagging it MEASURED would make it indistinguishable from instrumented sensor data
+    in every downstream query.
+    """
+    normalised = image_path.replace("\\", "/").lstrip("./")
+    if normalised.startswith("data/uploads/"):
+        return DataOrigin.USER_UPLOADED
+    if normalised.startswith("data/demo/"):
+        return DataOrigin.DEMONSTRATION
+    # data/raw and data/processed hold the training and evaluation corpora.
+    return DataOrigin.PUBLIC_BENCHMARK
+
+
 @app.post("/api/v1/missions/{mission_id}/analyze")
 def analyze_mission_image(mission_id: str, request: AnalyzeRequest) -> list[dict]:
     _product_call(lambda: product_store.get_mission(mission_id))
@@ -355,7 +371,7 @@ def analyze_mission_image(mission_id: str, request: AnalyzeRequest) -> list[dict
                 model_version=prediction.model_version,
                 source_media=request.image_path,
                 regions=prediction.regions,
-                origin=DataOrigin.MEASURED,
+                origin=_media_origin(request.image_path),
                 source="aeris.model_registry",
             )
         )
