@@ -1,7 +1,12 @@
 * text=auto
 
+# Anything whose SHA-256 is published as an integrity claim must never have its line
+# endings rewritten on checkout — `text=auto` would turn LF into CRLF on Windows and
+# silently invalidate the hash recorded in docs/dataset.md.
+data/** -text
+models/** -text
+
 # Optional Git LFS patterns (uncomment as needed)
 # *.pt filter=lfs diff=lfs merge=lfs -text
-# data/** filter=lfs diff=lfs merge=lfs -text
 # outputs/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
 # outputs/**/*.avi filter=lfs diff=lfs merge=lfs -text

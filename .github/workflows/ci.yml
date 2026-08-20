@@ -23,4 +23,8 @@ jobs:
       - run: ruff check .
       - run: ruff format --check .
       - run: pytest -q
+      # The demonstration dataset's SHA-256 is published in docs/dataset.md as an
+      # integrity claim; this fails the build if the committed file drifts from what
+      # the generator produces.
+      - run: python scripts/export_demo_dataset.py --check
       - run: aeris-benchmark --seed 7 --trials 1 --output artifacts/benchmark-smoke.json

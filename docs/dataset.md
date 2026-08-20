@@ -32,7 +32,18 @@ Unknown values in the telemetry schema are nullable. Origin, source, scenario ID
 `data/demo/aeris_demo_seed_2026.json` is the authoritative product seed. Generate it with
 `scripts/export_demo_dataset.py`. Its fixed source is `aeris.demo.seed.v1`, seed is 2026, and
 generation timestamp is fixed so byte output is reproducible. SHA-256 for this revision is
-`db0e2e7d6d23115cae030560d9660ae67ed98503f01f1d479ca11795e0c7503f`.
+`bbccb2e42181940ab12d317541ec955524fe50e6f6fbc3d3a0a6aab340908b87`.
+
+Reproducibility is enforced, not just asserted. `scripts/export_demo_dataset.py --check`
+regenerates the dataset and fails if the committed file differs; CI runs it on every push.
+Three things make the hash stable:
+
+- the export runs against a throwaway database, so nothing the app or the test suite wrote
+  into `artifacts/aeris_product.db` can leak into it;
+- the file is written as bytes with explicit LF newlines, so it does not change when
+  generated on Windows;
+- `.gitattributes` marks `data/**` as binary for end-of-line purposes, so `text=auto`
+  cannot rewrite the newlines on checkout and invalidate the hash.
 
 The locations are intentionally demonstration records for the prototype. Evidence URIs are
 labelled demonstration references, not downloadable photographs. Observation confidence is null

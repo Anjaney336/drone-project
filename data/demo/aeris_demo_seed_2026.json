@@ -16,7 +16,7 @@
       "inspection_status": "INSPECTED",
       "condition_score": 35.8,
       "priority": "CRITICAL",
-      "priority_score": 82.2,
+      "priority_score": 82.1,
       "priority_explanation": "[\"Severe observation recorded\", \"Repeated across 3 inspections\", \"High asset criticality\", \"Condition deterioration increased\", \"Located in a concentrated problem area\", \"Observation confidence unavailable; neutral value used for triage\"]",
       "last_inspection": "2026-01-15",
       "origin": "demonstration",
@@ -197,7 +197,9 @@
       "records_ingested": 2480,
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
-      "timestamp": "2026-01-15T09:00:00+00:00"
+      "timestamp": "2026-01-15T09:00:00+00:00",
+      "domain": "infrastructure",
+      "drone_id": null
     },
     {
       "mission_id": "MIS-002",
@@ -209,7 +211,9 @@
       "records_ingested": 2480,
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
-      "timestamp": "2026-01-15T09:00:00+00:00"
+      "timestamp": "2026-01-15T09:00:00+00:00",
+      "domain": "infrastructure",
+      "drone_id": null
     },
     {
       "mission_id": "MIS-003",
@@ -221,7 +225,9 @@
       "records_ingested": 2480,
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
-      "timestamp": "2026-01-15T09:00:00+00:00"
+      "timestamp": "2026-01-15T09:00:00+00:00",
+      "domain": "infrastructure",
+      "drone_id": null
     },
     {
       "mission_id": "MIS-004",
@@ -233,7 +239,9 @@
       "records_ingested": 2480,
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
-      "timestamp": "2026-01-15T09:00:00+00:00"
+      "timestamp": "2026-01-15T09:00:00+00:00",
+      "domain": "infrastructure",
+      "drone_id": null
     }
   ],
   "observations": [
@@ -338,85 +346,85 @@
   ],
   "priority_assessments": [
     {
-      "assessment_id": "8b1b7985-3a5c-4284-ae4e-bd181175068b",
+      "assessment_id": "PA-DEMO-BR-042",
       "asset_id": "BR-042",
-      "score": 82.2,
+      "score": 82.1,
       "level": "CRITICAL",
       "components": "{\"severity\": 0.92, \"confidence\": 0.5, \"criticality\": 0.95, \"recurrence\": 0.75, \"trend\": 0.82, \"geographic_impact\": 0.76}",
       "explanation": "[\"Severe observation recorded\", \"Repeated across 3 inspections\", \"High asset criticality\", \"Condition deterioration increased\", \"Located in a concentrated problem area\", \"Observation confidence unavailable; neutral value used for triage\"]",
-      "formula": "0.30\u00d7severity + 0.15\u00d7confidence + 0.25\u00d7criticality + 0.10\u00d7recurrence + 0.10\u00d7trend + 0.10\u00d7geographic_impact",
+      "formula": "0.30×severity + 0.15×confidence + 0.25×criticality + 0.10×recurrence + 0.10×trend + 0.10×geographic_impact",
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
       "timestamp": "2026-01-15T09:00:00+00:00"
     },
     {
-      "assessment_id": "6231407e-343f-451c-88c7-cf0ba3c33604",
+      "assessment_id": "PA-DEMO-RD-109",
       "asset_id": "RD-109",
       "score": 70.5,
       "level": "HIGH",
       "components": "{\"severity\": 0.78, \"confidence\": 0.5, \"criticality\": 0.82, \"recurrence\": 0.5, \"trend\": 0.67, \"geographic_impact\": 0.74}",
       "explanation": "[\"Severe observation recorded\", \"High asset criticality\", \"Condition deterioration increased\", \"Located in a concentrated problem area\", \"Observation confidence unavailable; neutral value used for triage\"]",
-      "formula": "0.30\u00d7severity + 0.15\u00d7confidence + 0.25\u00d7criticality + 0.10\u00d7recurrence + 0.10\u00d7trend + 0.10\u00d7geographic_impact",
+      "formula": "0.30×severity + 0.15×confidence + 0.25×criticality + 0.10×recurrence + 0.10×trend + 0.10×geographic_impact",
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
       "timestamp": "2026-01-15T09:00:00+00:00"
     },
     {
-      "assessment_id": "e574ca9a-8180-4d83-88b8-30016c46e708",
+      "assessment_id": "PA-DEMO-CL-018",
       "asset_id": "CL-018",
       "score": 60.3,
       "level": "MEDIUM",
       "components": "{\"severity\": 0.61, \"confidence\": 0.5, \"criticality\": 0.72, \"recurrence\": 0.5, \"trend\": 0.45, \"geographic_impact\": 0.7}",
       "explanation": "[\"Located in a concentrated problem area\", \"Observation confidence unavailable; neutral value used for triage\"]",
-      "formula": "0.30\u00d7severity + 0.15\u00d7confidence + 0.25\u00d7criticality + 0.10\u00d7recurrence + 0.10\u00d7trend + 0.10\u00d7geographic_impact",
+      "formula": "0.30×severity + 0.15×confidence + 0.25×criticality + 0.10×recurrence + 0.10×trend + 0.10×geographic_impact",
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
       "timestamp": "2026-01-15T09:00:00+00:00"
     },
     {
-      "assessment_id": "82022f54-4f19-46f2-b604-cbb3a551b2fa",
+      "assessment_id": "PA-DEMO-BR-017",
       "asset_id": "BR-017",
       "score": 52.2,
       "level": "MEDIUM",
       "components": "{\"severity\": 0.44, \"confidence\": 0.5, \"criticality\": 0.9, \"recurrence\": 0.25, \"trend\": 0.3, \"geographic_impact\": 0.35}",
       "explanation": "[\"High asset criticality\", \"Observation confidence unavailable; neutral value used for triage\"]",
-      "formula": "0.30\u00d7severity + 0.15\u00d7confidence + 0.25\u00d7criticality + 0.10\u00d7recurrence + 0.10\u00d7trend + 0.10\u00d7geographic_impact",
+      "formula": "0.30×severity + 0.15×confidence + 0.25×criticality + 0.10×recurrence + 0.10×trend + 0.10×geographic_impact",
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
       "timestamp": "2026-01-15T09:00:00+00:00"
     },
     {
-      "assessment_id": "c435a5f6-896b-4db0-92cb-8805a2e0a5d3",
+      "assessment_id": "PA-DEMO-RD-221",
       "asset_id": "RD-221",
       "score": 62.7,
       "level": "MEDIUM",
       "components": "{\"severity\": 0.69, \"confidence\": 0.5, \"criticality\": 0.78, \"recurrence\": 0.5, \"trend\": 0.52, \"geographic_impact\": 0.48}",
       "explanation": "[\"Observation confidence unavailable; neutral value used for triage\"]",
-      "formula": "0.30\u00d7severity + 0.15\u00d7confidence + 0.25\u00d7criticality + 0.10\u00d7recurrence + 0.10\u00d7trend + 0.10\u00d7geographic_impact",
+      "formula": "0.30×severity + 0.15×confidence + 0.25×criticality + 0.10×recurrence + 0.10×trend + 0.10×geographic_impact",
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
       "timestamp": "2026-01-15T09:00:00+00:00"
     },
     {
-      "assessment_id": "71e00575-400d-43ca-bdc6-8b6c49de7b83",
+      "assessment_id": "PA-DEMO-RD-305",
       "asset_id": "RD-305",
       "score": 74.6,
       "level": "HIGH",
       "components": "{\"severity\": 0.84, \"confidence\": 0.5, \"criticality\": 0.86, \"recurrence\": 0.75, \"trend\": 0.71, \"geographic_impact\": 0.58}",
       "explanation": "[\"Severe observation recorded\", \"Repeated across 3 inspections\", \"High asset criticality\", \"Condition deterioration increased\", \"Observation confidence unavailable; neutral value used for triage\"]",
-      "formula": "0.30\u00d7severity + 0.15\u00d7confidence + 0.25\u00d7criticality + 0.10\u00d7recurrence + 0.10\u00d7trend + 0.10\u00d7geographic_impact",
+      "formula": "0.30×severity + 0.15×confidence + 0.25×criticality + 0.10×recurrence + 0.10×trend + 0.10×geographic_impact",
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
       "timestamp": "2026-01-15T09:00:00+00:00"
     },
     {
-      "assessment_id": "051e8d6c-f660-4ea6-a0b0-c69ae587fc0f",
+      "assessment_id": "PA-DEMO-BR-088",
       "asset_id": "BR-088",
       "score": 58.4,
       "level": "MEDIUM",
       "components": "{\"severity\": 0.58, \"confidence\": 0.5, \"criticality\": 0.92, \"recurrence\": 0.25, \"trend\": 0.38, \"geographic_impact\": 0.42}",
       "explanation": "[\"High asset criticality\", \"Observation confidence unavailable; neutral value used for triage\"]",
-      "formula": "0.30\u00d7severity + 0.15\u00d7confidence + 0.25\u00d7criticality + 0.10\u00d7recurrence + 0.10\u00d7trend + 0.10\u00d7geographic_impact",
+      "formula": "0.30×severity + 0.15×confidence + 0.25×criticality + 0.10×recurrence + 0.10×trend + 0.10×geographic_impact",
       "origin": "demonstration",
       "source": "aeris.demo.seed.v1",
       "timestamp": "2026-01-15T09:00:00+00:00"
