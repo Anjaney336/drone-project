@@ -309,6 +309,22 @@ class ProductStore:
             }
             if "regions" not in finding_columns:
                 db.execute("ALTER TABLE ai_findings ADD COLUMN regions TEXT")
+            reliability_columns = {
+                row[1]
+                for row in db.execute(
+                    "PRAGMA table_info(mission_reliability_assessments)"
+                ).fetchall()
+            }
+            if "unavailable_components" not in reliability_columns:
+                db.execute(
+                    "ALTER TABLE mission_reliability_assessments "
+                    "ADD COLUMN unavailable_components TEXT NOT NULL DEFAULT '{}'"
+                )
+            if "weights_used" not in reliability_columns:
+                db.execute(
+                    "ALTER TABLE mission_reliability_assessments "
+                    "ADD COLUMN weights_used TEXT NOT NULL DEFAULT '{}'"
+                )
             count = db.execute("SELECT COUNT(*) FROM assets").fetchone()[0]
             if not count:
                 self._seed(db)
@@ -973,7 +989,11 @@ class ProductStore:
             assessment_id = f"REL-{uuid4().hex[:8].upper()}"
             when = utc_now()
             db.execute(
-                "INSERT INTO mission_reliability_assessments VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO mission_reliability_assessments ("
+                "assessment_id, mission_id, level, score, components, weighted_components, "
+                "formula, reasons, is_simulation, sample_count, timestamp, "
+                "unavailable_components, weights_used"
+                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 (
                     assessment_id,
                     mission_id,
@@ -986,6 +1006,8 @@ class ProductStore:
                     int(result["is_simulation"]),
                     result["sample_count"],
                     when,
+                    json.dumps(result.get("unavailable_components", {})),
+                    json.dumps(result.get("weights_used", {})),
                 ),
             )
         return {
@@ -1009,12 +1031,20 @@ class ProductStore:
                 "score": None,
                 "reasons": ["No telemetry has been ingested for this mission yet."],
                 "components": {},
+                "unavailable_components": {},
+                "weighted_components": {},
+                "weights_used": {},
                 "is_simulation": False,
                 "sample_count": 0,
             }
         result = dict(row)
-        result["components"] = json.loads(result["components"])
-        result["weighted_components"] = json.loads(result["weighted_components"])
+        for field in (
+            "components",
+            "weighted_components",
+            "unavailable_components",
+            "weights_used",
+        ):
+            result[field] = json.loads(result.get(field) or "{}")
         result["reasons"] = json.loads(result["reasons"])
         result["is_simulation"] = bool(result["is_simulation"])
         return result
