@@ -2,6 +2,7 @@
 small channel widths, downsized inputs, few epochs. This is an explicit small
 baseline, not an accuracy-optimized model (see configs/training/crack_segmentation.yaml).
 """
+
 from __future__ import annotations
 
 import json
@@ -12,7 +13,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader, Dataset
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -28,8 +29,16 @@ class CrackSegDataset(Dataset):
 
     def __getitem__(self, idx: int):
         r = self.records[idx]
-        img = Image.open(ROOT / r["file_path"]).convert("RGB").resize((self.image_size, self.image_size))
-        mask = Image.open(ROOT / r["label_path"]).convert("L").resize((self.image_size, self.image_size))
+        img = (
+            Image.open(ROOT / r["file_path"])
+            .convert("RGB")
+            .resize((self.image_size, self.image_size))
+        )
+        mask = (
+            Image.open(ROOT / r["label_path"])
+            .convert("L")
+            .resize((self.image_size, self.image_size))
+        )
         img_arr = np.asarray(img, dtype=np.float32) / 255.0
         mask_arr = (np.asarray(mask, dtype=np.float32) > 127).astype(np.float32)
         if self.augment and np.random.rand() < 0.5:
@@ -43,11 +52,17 @@ class CrackSegDataset(Dataset):
 class TinyUNet(nn.Module):
     def __init__(self, base: int = 16) -> None:
         super().__init__()
+
         def block(cin, cout):
             return nn.Sequential(
-                nn.Conv2d(cin, cout, 3, padding=1), nn.BatchNorm2d(cout), nn.ReLU(inplace=True),
-                nn.Conv2d(cout, cout, 3, padding=1), nn.BatchNorm2d(cout), nn.ReLU(inplace=True),
+                nn.Conv2d(cin, cout, 3, padding=1),
+                nn.BatchNorm2d(cout),
+                nn.ReLU(inplace=True),
+                nn.Conv2d(cout, cout, 3, padding=1),
+                nn.BatchNorm2d(cout),
+                nn.ReLU(inplace=True),
             )
+
         self.enc1 = block(3, base)
         self.enc2 = block(base, base * 2)
         self.enc3 = block(base * 2, base * 4)
@@ -77,13 +92,19 @@ def iou_dice(pred_logits: torch.Tensor, target: torch.Tensor) -> tuple[float, fl
     inter = (pred * target).sum().item()
     union = ((pred + target) > 0).float().sum().item()
     iou = inter / union if union > 0 else float("nan")
-    dice = (2 * inter) / (pred.sum().item() + target.sum().item()) if (pred.sum().item() + target.sum().item()) > 0 else float("nan")
+    dice = (
+        (2 * inter) / (pred.sum().item() + target.sum().item())
+        if (pred.sum().item() + target.sum().item()) > 0
+        else float("nan")
+    )
     return iou, dice
 
 
 def run_segmentation(cfg: dict, run_dir: Path) -> dict:
     torch.manual_seed(cfg["seed"])
-    manifest = json.loads((ROOT / "data" / "manifests" / "uav_crack_segmentation_manifest.json").read_text())
+    manifest = json.loads(
+        (ROOT / "data" / "manifests" / "uav_crack_segmentation_manifest.json").read_text()
+    )
     by_split = {"train": [], "val": [], "test": []}
     for r in manifest["records"]:
         if r["label_path"] is not None:
@@ -127,7 +148,9 @@ def run_segmentation(cfg: dict, run_dir: Path) -> dict:
                 val_loss += F.binary_cross_entropy_with_logits(logits, masks).item() * imgs.size(0)
         val_loss /= max(len(val_ds), 1)
         history.append({"epoch": epoch + 1, "train_loss": train_loss, "val_loss": val_loss})
-        print(f"epoch {epoch + 1}/{t['epochs']} train_loss={train_loss:.4f} val_loss={val_loss:.4f}")
+        print(
+            f"epoch {epoch + 1}/{t['epochs']} train_loss={train_loss:.4f} val_loss={val_loss:.4f}"
+        )
 
         if val_loss < best_val_loss:
             best_val_loss = val_loss

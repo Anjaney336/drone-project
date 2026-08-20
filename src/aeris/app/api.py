@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
-
 import uuid
+from pathlib import Path
 
 import numpy as np
 from fastapi import FastAPI, HTTPException, UploadFile
@@ -11,6 +10,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
+from aeris.app.model_registry import REGISTRY, registry_status
 from aeris.app.product_models import (
     ActionCreate,
     ActionUpdate,
@@ -23,9 +23,7 @@ from aeris.app.product_models import (
     SyncRequest,
     TelemetryIngest,
 )
-from aeris.app.model_registry import REGISTRY, registry_status
 from aeris.app.product_service import ProductStore
-from aeris.models import DataOrigin
 from aeris.app.schemas import (
     MissionArtifacts,
     MissionCreate,
@@ -36,6 +34,7 @@ from aeris.app.schemas import (
     MissionTelemetry,
 )
 from aeris.app.service import MissionStore
+from aeris.models import DataOrigin
 
 app = FastAPI(title="AERIS Infrastructure Intelligence API", version="1.0.0")
 store = MissionStore()
@@ -51,7 +50,13 @@ def health() -> dict:
         db_ok = True
     except Exception:  # noqa: BLE001 - health check must not raise, just report
         db_ok = False
-    return {"status": "ok" if db_ok else "degraded", "service": "aeris-api", "database": "ok" if db_ok else "unavailable"}
+    return {
+        "status": "ok" if db_ok else "degraded",
+        "service": "aeris-api",
+        "database": "ok" if db_ok else "unavailable",
+    }
+
+
 BENCHMARK_PATH = Path("artifacts/benchmark.json")
 SYNTHETIC_VALIDATION_PATH = Path("artifacts/synthetic_data_validation.json")
 SYNTHETIC_HELD_OUT_PATH = Path("data/processed/synthetic/held_out.npz")
@@ -360,7 +365,12 @@ def analyze_mission_image(mission_id: str, request: AnalyzeRequest) -> list[dict
 
 ROOT = Path(__file__).resolve().parents[3]
 UPLOAD_ROOT = ROOT / "data" / "uploads"
-MEDIA_ROOTS = [ROOT / "data" / "raw", ROOT / "data" / "processed", ROOT / "data" / "demo", UPLOAD_ROOT]
+MEDIA_ROOTS = [
+    ROOT / "data" / "raw",
+    ROOT / "data" / "processed",
+    ROOT / "data" / "demo",
+    UPLOAD_ROOT,
+]
 ALLOWED_UPLOAD_TYPES = {"image/jpeg", "image/png"}
 MAX_UPLOAD_BYTES = 15 * 1024 * 1024
 
@@ -384,10 +394,16 @@ async def upload_mission_media(mission_id: str, file: UploadFile) -> dict:
     returned relative path is usable directly by /analyze and /media."""
     _product_call(lambda: product_store.get_mission(mission_id))
     if file.content_type not in ALLOWED_UPLOAD_TYPES:
-        raise HTTPException(status_code=415, detail=f"Unsupported content type: {file.content_type}. Allowed: {sorted(ALLOWED_UPLOAD_TYPES)}")
+        raise HTTPException(
+            status_code=415,
+            detail=f"Unsupported content type: {file.content_type}. "
+            f"Allowed: {sorted(ALLOWED_UPLOAD_TYPES)}",
+        )
     body = await file.read()
     if len(body) > MAX_UPLOAD_BYTES:
-        raise HTTPException(status_code=413, detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024*1024)}MB limit")
+        raise HTTPException(
+            status_code=413, detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024 * 1024)}MB limit"
+        )
     ext = ".jpg" if file.content_type == "image/jpeg" else ".png"
     mission_dir = UPLOAD_ROOT / mission_id
     mission_dir.mkdir(parents=True, exist_ok=True)
@@ -416,7 +432,9 @@ async def upload_mission_telemetry(mission_id: str, file: UploadFile) -> dict:
     _product_call(lambda: product_store.get_mission(mission_id))
     body = await file.read()
     if len(body) > MAX_UPLOAD_BYTES:
-        raise HTTPException(status_code=413, detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024*1024)}MB limit")
+        raise HTTPException(
+            status_code=413, detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024 * 1024)}MB limit"
+        )
     name = (file.filename or "").lower()
     try:
         if name.endswith(".json"):
@@ -452,7 +470,11 @@ def sample_telemetry_csv() -> dict:
             "1,88,0.79,9,0.90,0\n"
             "2,84,0.52,6,0.85,1\n"
         ),
-        "note": "Only timestamp is required. Every other column is optional — omit any you don't have; AERIS will mark that dimension NOT AVAILABLE rather than assuming a value.",
+        "note": (
+            "Only timestamp is required. Every other column is optional — omit any you "
+            "don't have; AERIS will mark that dimension NOT AVAILABLE rather than "
+            "assuming a value."
+        ),
     }
 
 

@@ -5,6 +5,7 @@ column produces rows with only battery_percent set; nothing is invented for
 missing fields. Column names are matched case-insensitively against known
 aliases so a real drone log's slightly different header names still work.
 """
+
 from __future__ import annotations
 
 import csv
@@ -49,7 +50,9 @@ def _coerce(field: str, raw: str | None):
         return None
 
 
-def parse_telemetry_csv(content: bytes, mission_id: str, source: str) -> tuple[list[TelemetryIngest], list[str]]:
+def parse_telemetry_csv(
+    content: bytes, mission_id: str, source: str
+) -> tuple[list[TelemetryIngest], list[str]]:
     """Returns (rows, recognized_columns). Raises ValueError on structurally unusable input."""
     text = content.decode("utf-8-sig", errors="replace")
     reader = csv.DictReader(io.StringIO(text))
@@ -80,7 +83,9 @@ def parse_telemetry_csv(content: bytes, mission_id: str, source: str) -> tuple[l
     return rows, sorted(column_map.keys())
 
 
-def parse_telemetry_json(content: bytes, mission_id: str, source: str) -> tuple[list[TelemetryIngest], list[str]]:
+def parse_telemetry_json(
+    content: bytes, mission_id: str, source: str
+) -> tuple[list[TelemetryIngest], list[str]]:
     data = json.loads(content.decode("utf-8"))
     if not isinstance(data, list):
         raise ValueError("JSON telemetry file must be a list of records")

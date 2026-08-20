@@ -7,6 +7,7 @@ the same code path the API and frontend use. Uses a real held-out test-split ima
 one from the training set, and prints its per-step evidence so it can be read aloud during
 a live demo or verified against the API afterward.
 """
+
 from __future__ import annotations
 
 import json
@@ -20,13 +21,13 @@ sys.path.insert(0, str(ROOT / "src"))
 from aeris.app.model_registry import REGISTRY  # noqa: E402
 from aeris.app.product_models import (  # noqa: E402
     AIFindingCreate,
+    Domain,
     DroneCreate,
     HumanReviewCreate,
-    ProductMissionCreate,
-    TelemetryIngest,
-    Domain,
     MissionType,
+    ProductMissionCreate,
     ReviewVerdict,
+    TelemetryIngest,
 )
 from aeris.app.product_service import ProductStore  # noqa: E402
 from aeris.models import DataOrigin  # noqa: E402
@@ -67,19 +68,37 @@ def main() -> None:
     print(f"Drone registered: {drone['drone_id']} ({drone['name']})")
 
     step("3", "Select real held-out inspection image (never used in training)")
-    manifest = json.loads((ROOT / "data" / "manifests" / "damage_detection_manifest.json").read_text())
+    manifest = json.loads(
+        (ROOT / "data" / "manifests" / "damage_detection_manifest.json").read_text()
+    )
     test_record = next(r for r in manifest["records"] if r["split"] == "test")
     image_path = test_record["file_path"]
     print(f"Image: {image_path} (split=test, seed={manifest['seed']})")
 
     step("4", "Ingest mission telemetry (deliberately mixed quality, not idealized)")
     telemetry = [
-        TelemetryIngest(mission_id=mission_id, timestamp=0.0, gnss_quality=0.88, satellite_count=11,
-                         camera_confidence=0.95, packet_delay_s=0.12, battery_percent=91,
-                         origin=DataOrigin.FIELD, source="aeris.demo.flagship_scenario"),
-        TelemetryIngest(mission_id=mission_id, timestamp=1.0, gnss_quality=0.71, satellite_count=8,
-                         camera_confidence=0.90, packet_delay_s=0.31, battery_percent=84,
-                         origin=DataOrigin.FIELD, source="aeris.demo.flagship_scenario"),
+        TelemetryIngest(
+            mission_id=mission_id,
+            timestamp=0.0,
+            gnss_quality=0.88,
+            satellite_count=11,
+            camera_confidence=0.95,
+            packet_delay_s=0.12,
+            battery_percent=91,
+            origin=DataOrigin.FIELD,
+            source="aeris.demo.flagship_scenario",
+        ),
+        TelemetryIngest(
+            mission_id=mission_id,
+            timestamp=1.0,
+            gnss_quality=0.71,
+            satellite_count=8,
+            camera_confidence=0.90,
+            packet_delay_s=0.31,
+            battery_percent=84,
+            origin=DataOrigin.FIELD,
+            source="aeris.demo.flagship_scenario",
+        ),
     ]
     reliability = store.ingest_telemetry(telemetry)
     print(f"Telemetry ingested: {len(telemetry)} record(s)")
@@ -89,7 +108,10 @@ def main() -> None:
     status = model.status()
     print(f"Model status: {status.value}")
     if status.value != "READY":
-        print("Model is not READY — cannot run real inference. Stopping rather than fabricating a result.")
+        print(
+            "Model is not READY — cannot run real inference. "
+            "Stopping rather than fabricating a result."
+        )
         return
     predictions = model.analyze(str(ROOT / image_path))
     print(f"Real predictions: {len(predictions)}")
@@ -114,7 +136,10 @@ def main() -> None:
             )
         )
         findings.append(finding)
-        print(f"  {finding['label']} — confidence {finding['confidence']:.0%} — model {finding['model_name']}:{finding['model_version']}")
+        print(
+            f"  {finding['label']} — confidence {finding['confidence']:.0%} — "
+            f"model {finding['model_name']}:{finding['model_version']}"
+        )
     if not findings:
         print("  No findings above threshold on this image.")
 
@@ -136,7 +161,10 @@ def main() -> None:
     step("10", "Send finding to Human Review")
     if findings:
         top_finding = max(findings, key=lambda f: f["confidence"])
-        print(f"Highest-confidence finding queued for review: {top_finding['label']} ({top_finding['confidence']:.0%})")
+        print(
+            f"Highest-confidence finding queued for review: {top_finding['label']} "
+            f"({top_finding['confidence']:.0%})"
+        )
     else:
         print("No findings to review on this image.")
 
@@ -144,8 +172,11 @@ def main() -> None:
     if findings:
         reviewed = store.submit_human_review(
             top_finding["finding_id"],
-            HumanReviewCreate(verdict=ReviewVerdict.NEEDS_REINSPECTION, reviewer="Demo Reviewer",
-                               notes="Flagged for physical verification during scripted demo run."),
+            HumanReviewCreate(
+                verdict=ReviewVerdict.NEEDS_REINSPECTION,
+                reviewer="Demo Reviewer",
+                notes="Flagged for physical verification during scripted demo run.",
+            ),
         )
         print(f"Verdict persisted: {reviewed['review_status']}")
 
@@ -153,7 +184,10 @@ def main() -> None:
     summary = store.executive_summary()
     print(f"Active missions: {summary['metrics']['active_missions']}")
     print(f"High-priority assets: {summary['metrics']['high_priority_assets']}")
-    print(f"\nDemo complete. Mission ID: {mission_id} — open http://127.0.0.1:8501/#mission/{mission_id} to see it live.")
+    print(
+        f"\nDemo complete. Mission ID: {mission_id} — open "
+        f"http://127.0.0.1:8501/#mission/{mission_id} to see it live."
+    )
 
 
 if __name__ == "__main__":

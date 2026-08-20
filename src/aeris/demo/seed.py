@@ -7,6 +7,7 @@ explicit, named, documented step rather than something that only happens as a si
 of the API server starting - it does not add a second seeding path or silently inject data
 into a database that already has real records.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -26,10 +27,19 @@ def main() -> None:
     demo_count = sum(1 for a in assets if a["origin"] == "demonstration")
 
     if is_fresh:
-        print(f"Initialized {args.db} and seeded {demo_count} DEMO DATA assets (origin=demonstration).")
+        print(
+            f"Initialized {args.db} and seeded {demo_count} DEMO DATA assets "
+            "(origin=demonstration)."
+        )
     else:
-        print(f"{args.db} already exists with {len(assets)} asset(s), {demo_count} labelled DEMO DATA.")
-        print("No data was overwritten. To start clean, delete the database file first and rerun this command.")
+        print(
+            f"{args.db} already exists with {len(assets)} asset(s), "
+            f"{demo_count} labelled DEMO DATA."
+        )
+        print(
+            "No data was overwritten. To start clean, delete the database file first "
+            "and rerun this command."
+        )
 
 
 if __name__ == "__main__":

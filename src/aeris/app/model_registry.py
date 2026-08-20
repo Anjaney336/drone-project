@@ -6,6 +6,7 @@ reports one of four honest states per model and only runs inference when READY. 
 adapter fabricates a prediction: if a checkpoint isn't there, analyze() raises rather
 than returning a made-up finding.
 """
+
 from __future__ import annotations
 
 import json
@@ -58,7 +59,9 @@ class ModelAdapter(ABC):
             "status": self.status(),
         }
         if status_file.exists():
-            base.update({k: v for k, v in json.loads(status_file.read_text()).items() if k != "status"})
+            base.update(
+                {k: v for k, v in json.loads(status_file.read_text()).items() if k != "status"}
+            )
         return base
 
     @abstractmethod
@@ -70,7 +73,8 @@ class ModelAdapter(ABC):
         status = self.status()
         if status != ModelStatus.READY:
             raise RuntimeError(
-                f"{self.model_name} is {status.value}, not READY; refusing to fabricate a prediction."
+                f"{self.model_name} is {status.value}, not READY; "
+                "refusing to fabricate a prediction."
             )
 
 
@@ -109,7 +113,8 @@ class InfrastructureDetectionModel(ModelAdapter):
                     ModelPrediction(
                         domain=self.domain,
                         task_type=self.task_type,
-                        label=f"AI Flagged: Possible Defect ({names.get(cls_id, f'class_{cls_id}')})",
+                        label="AI Flagged: Possible Defect "
+                        f"({names.get(cls_id, f'class_{cls_id}')})",
                         confidence=round(conf, 4),
                         model_name=self.model_name,
                         model_version=self.model_version,
@@ -148,7 +153,11 @@ class CrackSegmentationModel(ModelAdapter):
 
         model = self._load()
         img = Image.open(image_path).convert("RGB").resize((256, 256))
-        tensor = torch.from_numpy(np.asarray(img, dtype=np.float32) / 255.0).permute(2, 0, 1).unsqueeze(0)
+        tensor = (
+            torch.from_numpy(np.asarray(img, dtype=np.float32) / 255.0)
+            .permute(2, 0, 1)
+            .unsqueeze(0)
+        )
         with torch.no_grad():
             logits = model(tensor)
             probs = torch.sigmoid(logits)[0, 0]
@@ -165,7 +174,9 @@ class CrackSegmentationModel(ModelAdapter):
                 confidence=round(mean_confidence, 4),
                 model_name=self.model_name,
                 model_version=self.model_version,
-                regions=[{"type": "mask_summary", "affected_area_fraction": round(affected_fraction, 4)}],
+                regions=[
+                    {"type": "mask_summary", "affected_area_fraction": round(affected_fraction, 4)}
+                ],
             )
         ]
 
