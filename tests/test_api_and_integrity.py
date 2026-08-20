@@ -6,10 +6,9 @@ from pydantic import ValidationError
 
 from aeris.app import api
 from aeris.app.api import app
-from aeris.app.dashboard import (
+from aeris.app.plain_language import (
     UNAVAILABLE,
     fault_summary,
-    friendly_error,
     plain_safety_status,
     show,
     unavailable_explanation,
@@ -48,7 +47,6 @@ def test_unknown_api_fields_are_rejected():
 def test_dashboard_plain_language_contract():
     assert plain_safety_status("NORMAL")[0] == "✅ Safe"
     assert "Action recommended" in plain_safety_status("GEOFENCE_RISK")[0]
-    assert friendly_error.__name__ == "friendly_error"
     assert "does not compute separate IMU trust" in unavailable_explanation({}, "imu")
     assert fault_summary({}, [{"injected_fault": "synthetic_gnss_drift_high"}]).endswith(
         "(earlier; now inactive)"

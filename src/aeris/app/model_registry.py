@@ -10,6 +10,7 @@ than returning a made-up finding.
 from __future__ import annotations
 
 import json
+import threading
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
@@ -58,6 +59,10 @@ class ModelAdapter(ABC):
     def __init__(self) -> None:
         self.run_dir: Path = resolve_run_dir(self.experiment_name)
         self._model = None
+        # REGISTRY holds one adapter per model and FastAPI serves sync endpoints from a
+        # threadpool, so two concurrent /analyze calls can enter _load() at once and
+        # each build its own copy of the checkpoint.
+        self._load_lock = threading.Lock()
 
     def status(self) -> ModelStatus:
         status_file = self.run_dir / "status.json"
@@ -108,10 +113,12 @@ class InfrastructureDetectionModel(ModelAdapter):
 
     def _load(self):
         if self._model is None:
-            from ultralytics import YOLO
+            with self._load_lock:
+                if self._model is None:
+                    from ultralytics import YOLO
 
-            checkpoint = self.run_dir / "weights" / "best.pt"
-            self._model = YOLO(str(checkpoint))
+                    checkpoint = self.run_dir / "weights" / "best.pt"
+                    self._model = YOLO(str(checkpoint))
         return self._model
 
     def analyze(self, image_path: str) -> list[ModelPrediction]:
@@ -152,14 +159,18 @@ class CrackSegmentationModel(ModelAdapter):
 
     def _load(self):
         if self._model is None:
-            import torch
+            with self._load_lock:
+                if self._model is None:
+                    import torch
 
-            from aeris.training.segmentation import TinyUNet
+                    from aeris.training.segmentation import TinyUNet
 
-            model = TinyUNet(base=16)
-            model.load_state_dict(torch.load(self.run_dir / "best_model.pt", map_location="cpu"))
-            model.eval()
-            self._model = model
+                    model = TinyUNet(base=16)
+                    model.load_state_dict(
+                        torch.load(self.run_dir / "best_model.pt", map_location="cpu")
+                    )
+                    model.eval()
+                    self._model = model
         return self._model
 
     def analyze(self, image_path: str) -> list[ModelPrediction]:

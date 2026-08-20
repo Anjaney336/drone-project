@@ -52,7 +52,15 @@ class ConstantVelocityEKF:
         self.timestamp = timestamp
 
     def predict(self, timestamp: float, acceleration: np.ndarray | None = None) -> StateEstimate:
-        dt = max(float(timestamp) - self.timestamp, 0.0)
+        dt = float(timestamp) - self.timestamp
+        if dt < 0.0:
+            # Silently clamping to 0 would hide an out-of-order or duplicated
+            # measurement stream, which is exactly the kind of fault this filter exists
+            # to surface.
+            raise ValueError(
+                f"Measurement timestamp {timestamp} precedes the filter state at "
+                f"{self.timestamp}; telemetry is out of order."
+            )
         f = np.eye(6)
         f[:3, 3:] = np.eye(3) * dt
         g = np.vstack((np.eye(3) * (0.5 * dt * dt), np.eye(3) * dt))
@@ -103,11 +111,17 @@ class ConstantVelocityEKF:
         )
         if applied:
             effective_r = r * noise_scale
-            s = h @ self.p @ h.T + effective_r
-            k = self.p @ h.T @ np.linalg.inv(s)
+            effective_s = h @ self.p @ h.T + effective_r
+            # solve(), not inv(): forming the explicit inverse is both slower and less
+            # numerically stable. K = P H^T S^-1 is the transpose of solving S^T X = H P^T.
+            k = np.linalg.solve(effective_s.T, (h @ self.p.T)).T
             self.x = self.x + k @ innovation
             identity = np.eye(6)
             self.p = (identity - k @ h) @ self.p @ (identity - k @ h).T + k @ effective_r @ k.T
+        # `s` here is the innovation covariance the reported NIS was computed from. It
+        # used to be overwritten by the trust-scaled version used for the gain, so a
+        # consumer recomputing nis from innovation_covariance disagreed with the stored
+        # nis. The scaling is reported separately as effective_noise_scale.
         self.last_result = MeasurementResult(
             innovation, s, nis, accepted, applied, trust, noise_scale
         )

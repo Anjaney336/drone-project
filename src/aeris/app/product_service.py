@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import sqlite3
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
@@ -218,19 +220,44 @@ REVIEW_TRANSITIONS: dict[str, set[str]] = {
 }
 
 
+ROOT = Path(__file__).resolve().parents[3]
+# Anchored to the repository root, not the working directory. A relative default meant
+# starting the server from a different directory silently opened a different database.
+DEFAULT_DB_PATH = ROOT / "artifacts" / "aeris_product.db"
+
+
 class ProductStore:
-    def __init__(self, path: Path = Path("artifacts/aeris_product.db")) -> None:
-        self.path = path
+    def __init__(self, path: Path = DEFAULT_DB_PATH) -> None:
+        self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._initialize()
 
-    def _connect(self) -> sqlite3.Connection:
+    @contextmanager
+    def _connect(self) -> Iterator[sqlite3.Connection]:
+        """Commit-or-rollback *and* close.
+
+        `with sqlite3.connect(...)` only manages the transaction — it does not close the
+        connection, so every request leaked a handle until garbage collection. Wrapping
+        it here keeps all 26 call sites unchanged while making the close explicit.
+        """
         connection = sqlite3.connect(self.path)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA foreign_keys = ON")
-        return connection
+        try:
+            with connection:
+                yield connection
+        finally:
+            connection.close()
 
     def _initialize(self) -> None:
+        # WAL lets readers run concurrently with a writer. FastAPI serves sync endpoints
+        # from a threadpool, so without it concurrent requests hit "database is locked".
+        # The setting is persistent per database file, so it only needs setting once.
+        connection = sqlite3.connect(self.path)
+        try:
+            connection.execute("PRAGMA journal_mode=WAL")
+        finally:
+            connection.close()
         with self._connect() as db:
             db.executescript(
                 """
@@ -1175,8 +1202,15 @@ class ProductStore:
                     ).fetchall()
                 )
             ]
+        # One lookup for every distinct mission, not one per finding. This used to call
+        # get_mission_reliability() per row, and each call opened its own connection, so
+        # a queue of 100 findings meant 100 connections.
+        reliability = {
+            mission_id: self.get_mission_reliability(mission_id)
+            for mission_id in {row["mission_id"] for row in rows}
+        }
         for row in rows:
-            row["mission_reliability"] = self.get_mission_reliability(row["mission_id"])
+            row["mission_reliability"] = reliability[row["mission_id"]]
             self._attach_interpretation(row)
         return rows
 

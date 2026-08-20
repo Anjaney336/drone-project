@@ -550,13 +550,23 @@ def product_frontend():
     return FileResponse(STATIC_PATH / "index.html")
 
 
+# 8501 is AERIS's one canonical port, matching README.md, Dockerfile, .env.example and
+# every demo script. AERIS_HOST/AERIS_PORT override it for a non-default deployment.
+DEFAULT_HOST = os.environ.get("AERIS_HOST", "127.0.0.1")
+DEFAULT_PORT = int(os.environ.get("AERIS_PORT", "8501"))
+
+
 def run() -> None:
     import uvicorn
 
-    uvicorn.run("aeris.app.api:app", host="127.0.0.1", port=8000)
+    uvicorn.run(
+        "aeris.app.api:app",
+        host=DEFAULT_HOST,
+        port=DEFAULT_PORT,
+        log_level=os.environ.get("AERIS_LOG_LEVEL", "info").lower(),
+    )
 
 
-def run_product() -> None:
-    import uvicorn
-
-    uvicorn.run("aeris.app.api:app", host="127.0.0.1", port=8501)
+# Retained because pyproject exposes it as the `aeris-product` console script; both
+# entry points serve the same app on the same port.
+run_product = run

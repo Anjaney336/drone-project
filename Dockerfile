@@ -2,11 +2,24 @@ FROM python:3.12.11-slim
 
 WORKDIR /app
 COPY requirements.lock pyproject.toml README.md LICENSE ./
-RUN python -m pip install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.lock
+# requirements.lock carries its own --extra-index-url for the CPU-only torch wheels.
+# opencv-python-headless is used rather than opencv-python precisely so this slim image
+# does not need libGL and the rest of the GUI stack.
+RUN python -m pip install --no-cache-dir -r requirements.lock
 COPY src ./src
-RUN python -m pip install --no-cache-dir --no-build-isolation --no-deps -e .
+RUN python -m pip install --no-build-isolation --no-deps -e .
 
-RUN useradd --create-home --uid 10001 aeris
+# Runtime data the service actually serves. Without models/ every model reports
+# NOT_TRAINED; without data/demo the seeded dataset export has nothing to read.
+COPY configs ./configs
+COPY data/demo ./data/demo
+COPY data/manifests ./data/manifests
+COPY models ./models
+
+# data/uploads is written at runtime, so it must exist and be owned by the app user.
+RUN useradd --create-home --uid 10001 aeris \
+    && mkdir -p /app/data/uploads /app/artifacts \
+    && chown -R aeris:aeris /app/data /app/artifacts
 USER aeris
 
 EXPOSE 8501
