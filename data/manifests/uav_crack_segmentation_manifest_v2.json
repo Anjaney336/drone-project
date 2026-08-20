@@ -1,0 +1,15 @@
+{
+  "name": "uav_crack_segmentation",
+  "version": "local-1",
+  "source": "unverified - raw folder acquired without accompanying README/LICENSE; DJI filenames indicate genuine UAV capture but upstream release is not retained",
+  "license": "UNCONFIRMED - do not redistribute the full dataset publicly until a human confirms the original source and license",
+  "task": "semantic_segmentation_binary",
+  "domain": "infrastructure (pavement/structure cracks)",
+  "file_count": 630,
+  "image_count": 315,
+  "sha256_fingerprint": "4be299f389eb0f01b0c13a0752e77333b50a14e8523f2ff2a78b7a756a1aff3c",
+  "checksums_file": "data/manifests/uav_crack_segmentation_checksums.sha256",
+  "status": "READY_LOCAL_LICENSE_UNCONFIRMED",
+  "split_seed": 20260820,
+  "generated_at": "2026-08-20T21:02:44.724347+00:00"
+}

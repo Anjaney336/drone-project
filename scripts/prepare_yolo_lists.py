@@ -1,4 +1,5 @@
 """Turn the damage_detection manifest into Ultralytics-compatible split lists."""
+
 from __future__ import annotations
 
 import json
@@ -8,7 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> None:
-    manifest = json.loads((ROOT / "data" / "manifests" / "damage_detection_manifest.json").read_text())
+    manifest = json.loads(
+        (ROOT / "data" / "manifests" / "damage_detection_manifest.json").read_text()
+    )
     out_dir = ROOT / "data" / "processed" / "infrastructure" / "concrete" / "damage_detection"
     out_dir.mkdir(parents=True, exist_ok=True)
     by_split: dict[str, list[str]] = {"train": [], "val": [], "test": []}
@@ -20,7 +23,8 @@ def main() -> None:
         (out_dir / f"{split}.txt").write_text("\n".join(paths) + "\n")
         print(split, len(paths))
 
-    yaml_text = f"""# Auto-generated from data/manifests/damage_detection_manifest.json (seed {manifest['seed']})
+    seed = manifest["seed"]
+    yaml_text = f"""# Auto-generated from damage_detection_manifest.json (seed {seed})
 path: {ROOT.as_posix()}
 train: data/processed/infrastructure/concrete/damage_detection/train.txt
 val: data/processed/infrastructure/concrete/damage_detection/val.txt

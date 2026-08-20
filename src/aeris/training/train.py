@@ -3,6 +3,7 @@
 Supports object_detection (Ultralytics YOLO) task configs today. Fails loudly on
 unsupported task types rather than silently doing nothing.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -42,7 +43,7 @@ def run_object_detection(cfg: dict, run_dir: Path) -> dict:
     model = YOLO(cfg["model"]["pretrained_weights"])
     data_yaml = str(ROOT / cfg["data_config"])
     t = cfg["training"]
-    results = model.train(
+    model.train(
         data=data_yaml,
         epochs=t["epochs"],
         batch=t["batch_size"],
@@ -87,10 +88,16 @@ def main() -> None:
             from aeris.training.segmentation import run_segmentation
 
             result = run_segmentation(cfg, run_dir)
+        elif cfg["task_type"] == "image_classification":
+            from aeris.training.agriculture import run_agriculture_training
+
+            result = run_agriculture_training(cfg, run_dir)
         else:
             raise SystemExit(f"Unsupported task_type: {cfg['task_type']}")
     except Exception as exc:  # noqa: BLE001 - deliberately broad: this is a top-level CLI status gate
-        _write_status(run_dir, "UNAVAILABLE", experiment_name=cfg["experiment_name"], error=str(exc))
+        _write_status(
+            run_dir, "UNAVAILABLE", experiment_name=cfg["experiment_name"], error=str(exc)
+        )
         raise
     elapsed_s = round(time.monotonic() - started, 1)
 

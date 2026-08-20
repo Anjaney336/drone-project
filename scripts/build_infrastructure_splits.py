@@ -3,6 +3,7 @@ concrete-domain infrastructure datasets. Grouping is by image stem so the paired
 YOLO/VOC label formats for Damage Detection never separate, and no image appears
 in more than one split.
 """
+
 from __future__ import annotations
 
 import json
@@ -24,8 +25,8 @@ def split_ids(ids: list[str], train=0.7, val=0.15) -> dict[str, list[str]]:
     n_val = int(n * val)
     return {
         "train": sorted(ids[:n_train]),
-        "val": sorted(ids[n_train:n_train + n_val]),
-        "test": sorted(ids[n_train + n_val:]),
+        "val": sorted(ids[n_train : n_train + n_val]),
+        "test": sorted(ids[n_train + n_val :]),
     }
 
 
@@ -38,19 +39,33 @@ def build_damage_detection_manifest() -> dict:
     records = []
     for im in imgs:
         lbl = base / "Labels" / "Yolo" / f"{im.stem}.txt"
-        records.append({
-            "source_dataset": "damage_detection_local",
-            "domain": "infrastructure",
-            "task_type": "object_detection",
-            "file_path": str(im.relative_to(ROOT)).replace("\\", "/"),
-            "label_path": str(lbl.relative_to(ROOT)).replace("\\", "/") if lbl.exists() else None,
-            "split": stem_to_split[im.stem],
-            "provenance": {
-                "origin": "public_dataset_unverified_source",
-                "note": "Downloaded raw folder with no accompanying README/classes.txt; upstream source and exact license not retained. Class ids 0/1 are anonymous pending verification.",
-            },
-        })
-    return {"dataset": "damage_detection_local", "seed": SEED, "split_ratio": {"train": 0.7, "val": 0.15, "test": 0.15}, "count": len(records), "records": records}
+        records.append(
+            {
+                "source_dataset": "damage_detection_local",
+                "domain": "infrastructure",
+                "task_type": "object_detection",
+                "file_path": str(im.relative_to(ROOT)).replace("\\", "/"),
+                "label_path": str(lbl.relative_to(ROOT)).replace("\\", "/")
+                if lbl.exists()
+                else None,
+                "split": stem_to_split[im.stem],
+                "provenance": {
+                    "origin": "public_dataset_unverified_source",
+                    "note": (
+                        "Downloaded raw folder with no accompanying README/classes.txt; "
+                        "upstream source and exact license not retained. Class ids 0/1 are "
+                        "anonymous pending verification."
+                    ),
+                },
+            }
+        )
+    return {
+        "dataset": "damage_detection_local",
+        "seed": SEED,
+        "split_ratio": {"train": 0.7, "val": 0.15, "test": 0.15},
+        "count": len(records),
+        "records": records,
+    }
 
 
 def build_crack_segmentation_manifest() -> dict:
@@ -62,19 +77,32 @@ def build_crack_segmentation_manifest() -> dict:
     records = []
     for im in imgs:
         mask = base / "masks" / im.name
-        records.append({
-            "source_dataset": "uav_crack_segmentation_local",
-            "domain": "infrastructure",
-            "task_type": "semantic_segmentation_binary",
-            "file_path": str(im.relative_to(ROOT)).replace("\\", "/"),
-            "label_path": str(mask.relative_to(ROOT)).replace("\\", "/") if mask.exists() else None,
-            "split": stem_to_split[im.stem],
-            "provenance": {
-                "origin": "public_dataset_unverified_source",
-                "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder.",
-            },
-        })
-    return {"dataset": "uav_crack_segmentation_local", "seed": SEED, "split_ratio": {"train": 0.7, "val": 0.15, "test": 0.15}, "count": len(records), "records": records}
+        records.append(
+            {
+                "source_dataset": "uav_crack_segmentation_local",
+                "domain": "infrastructure",
+                "task_type": "semantic_segmentation_binary",
+                "file_path": str(im.relative_to(ROOT)).replace("\\", "/"),
+                "label_path": str(mask.relative_to(ROOT)).replace("\\", "/")
+                if mask.exists()
+                else None,
+                "split": stem_to_split[im.stem],
+                "provenance": {
+                    "origin": "public_dataset_unverified_source",
+                    "note": (
+                        "DJI-filename UAV pavement/crack imagery with binary masks; upstream "
+                        "source and exact license not retained with the raw folder."
+                    ),
+                },
+            }
+        )
+    return {
+        "dataset": "uav_crack_segmentation_local",
+        "seed": SEED,
+        "split_ratio": {"train": 0.7, "val": 0.15, "test": 0.15},
+        "count": len(records),
+        "records": records,
+    }
 
 
 if __name__ == "__main__":

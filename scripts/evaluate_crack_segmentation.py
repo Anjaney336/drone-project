@@ -3,6 +3,7 @@ Does not retrain. Computes per-image IoU/Dice/precision/recall and saves visual
 examples spanning the full quality range (best, median, worst) so results are not
 cherry-picked.
 """
+
 from __future__ import annotations
 
 import csv
@@ -36,14 +37,22 @@ def per_image_metrics(pred_mask: np.ndarray, gt_mask: np.ndarray) -> dict:
     dice = (2 * tp) / (2 * tp + fp + fn) if (2 * tp + fp + fn) > 0 else float("nan")
     precision = tp / (tp + fp) if (tp + fp) > 0 else float("nan")
     recall = tp / (tp + fn) if (tp + fn) > 0 else float("nan")
-    return {"iou": iou, "dice": dice, "precision": precision, "recall": recall,
-            "gt_crack_pixels": int(gt_mask.sum()), "pred_crack_pixels": int(pred_mask.sum())}
+    return {
+        "iou": iou,
+        "dice": dice,
+        "precision": precision,
+        "recall": recall,
+        "gt_crack_pixels": int(gt_mask.sum()),
+        "pred_crack_pixels": int(pred_mask.sum()),
+    }
 
 
-def save_visual(name: str, img: Image.Image, gt: np.ndarray, pred: np.ndarray, out_path: Path) -> None:
+def save_visual(
+    name: str, img: Image.Image, gt: np.ndarray, pred: np.ndarray, out_path: Path
+) -> None:
     img_arr = np.asarray(img).astype(np.float32)
     overlay = img_arr.copy()
-    # green = true positive, red = false positive (predicted, not gt), blue = false negative (missed)
+    # green = true positive, red = false positive, blue = false negative (missed)
     tp = np.logical_and(pred, gt)
     fp = np.logical_and(pred, ~gt)
     fn = np.logical_and(~pred, gt)
@@ -56,7 +65,9 @@ def save_visual(name: str, img: Image.Image, gt: np.ndarray, pred: np.ndarray, o
 
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    manifest = json.loads((ROOT / "data" / "manifests" / "uav_crack_segmentation_manifest.json").read_text())
+    manifest = json.loads(
+        (ROOT / "data" / "manifests" / "uav_crack_segmentation_manifest.json").read_text()
+    )
     test_records = [r for r in manifest["records"] if r["split"] == "test" and r["label_path"]]
 
     model = load_model()
@@ -75,7 +86,7 @@ def main() -> None:
         metrics["file"] = Path(record["file_path"]).name
         results.append(metrics)
 
-    results.sort(key=lambda r: (r["iou"] if not np.isnan(r["iou"]) else -1))
+    results.sort(key=lambda r: r["iou"] if not np.isnan(r["iou"]) else -1)
     valid = [r for r in results if not np.isnan(r["iou"])]
 
     with (OUT_DIR / "per_image_metrics.csv").open("w", newline="") as f:
@@ -88,7 +99,12 @@ def main() -> None:
         for r in records_subset:
             record = next(x for x in test_records if Path(x["file_path"]).name == r["file"])
             img = Image.open(ROOT / record["file_path"]).convert("RGB").resize((size, size))
-            gt_mask = np.asarray(Image.open(ROOT / record["label_path"]).convert("L").resize((size, size))) > 127
+            gt_mask = (
+                np.asarray(
+                    Image.open(ROOT / record["label_path"]).convert("L").resize((size, size))
+                )
+                > 127
+            )
             img_arr = np.asarray(img, dtype=np.float32) / 255.0
             tensor = torch.from_numpy(img_arr).permute(2, 0, 1).unsqueeze(0)
             with torch.no_grad():
@@ -98,8 +114,8 @@ def main() -> None:
 
     n = len(valid)
     worst = valid[: min(3, n)]
-    best = valid[max(0, n - 3):]
-    median = valid[max(0, n // 2 - 1): n // 2 + 2]
+    best = valid[max(0, n - 3) :]
+    median = valid[max(0, n // 2 - 1) : n // 2 + 2]
     visualize_group(worst, "worst")
     visualize_group(median, "median")
     visualize_group(best, "best")

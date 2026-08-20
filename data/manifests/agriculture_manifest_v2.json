@@ -1,0 +1,14 @@
+{
+  "name": "mh_soyahealthvision",
+  "version": "1",
+  "source": "Mendeley Data, DOI 10.17632/hkbgh5s3b7.1",
+  "license": "CC BY 4.0 (attribution required)",
+  "task": "image_classification (pending final confirmation from extracted annotation structure)",
+  "domain": "agriculture (soybean leaf disease + UAV aerial)",
+  "split_seed": 20260820,
+  "generated_at": "2026-08-20T21:02:44.725851+00:00",
+  "downloaded_bytes": 9073858342,
+  "expected_bytes_approx": 9750000000,
+  "completion_percent_approx": 93.1,
+  "status": "DOWNLOADING"
+}

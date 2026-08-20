@@ -22,9 +22,7 @@ def validate(path: Path) -> dict:
     estimated_tau = float(-dt / np.log(estimated_phi))
     gm_innovation = bias_y - estimated_phi * bias_x
     estimated_bias_sigma = float(np.std(gm_innovation) / np.sqrt(1 - estimated_phi**2))
-    valid = (
-        ~data["gnss_outage"] & ~data["urban_multipath"] & ~data["gnss_drift_active"]
-    )
+    valid = ~data["gnss_outage"] & ~data["urban_multipath"] & ~data["gnss_drift_active"]
     normalized = data["gnss_error_m"][valid, 0] / data["hdop"][valid]
     low = valid & (data["hdop"] < np.median(data["hdop"])) & ~data["urban_multipath"]
     high = valid & (data["hdop"] >= np.median(data["hdop"])) & ~data["urban_multipath"]

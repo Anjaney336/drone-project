@@ -14,6 +14,7 @@ the Digital Twin when a mission is simulated, or by a future onboard estimator f
 flights). No telemetry field is fabricated when absent — missing data lowers confidence
 in that dimension and is stated explicitly, never silently defaulted to a good score.
 """
+
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
@@ -80,14 +81,24 @@ def interpret_finding(label: str, confidence: float, reliability: dict) -> dict:
             "telemetry quality was LOW — navigation, sensor, or telemetry signals were degraded "
             "during this mission."
         )
-        action = "Reinspect before operational escalation. Do not treat this finding as confirmed evidence on its own."
+        action = (
+            "Reinspect before operational escalation. Do not treat this finding as "
+            "confirmed evidence on its own."
+        )
     else:
         interpretation = (
             f"The visual model detected '{label}' with {confidence:.0%} confidence. No telemetry "
             "was ingested for this mission, so reliability cannot be assessed."
         )
-        action = "Ingest mission telemetry, or treat this finding as unverified until reliability is known."
-    return {"interpretation": interpretation, "recommended_action": action, "reliability_level": level}
+        action = (
+            "Ingest mission telemetry, or treat this finding as unverified "
+            "until reliability is known."
+        )
+    return {
+        "interpretation": interpretation,
+        "recommended_action": action,
+        "reliability_level": level,
+    }
 
 
 def assess_mission_reliability(
@@ -116,29 +127,47 @@ def assess_mission_reliability(
         }
 
     # Navigation reliability: derived from GNSS quality and NIS consistency when present.
-    nis_values = [r["normalized_innovation_squared"] for r in telemetry_rows if r.get("normalized_innovation_squared") is not None]
+    nis_values = [
+        r["normalized_innovation_squared"]
+        for r in telemetry_rows
+        if r.get("normalized_innovation_squared") is not None
+    ]
     gnss_values = [r["gnss_quality"] for r in telemetry_rows if r.get("gnss_quality") is not None]
     if nis_values:
         mean_nis = sum(nis_values) / len(nis_values)
         nav_score = max(0.0, 1.0 - min(1.0, mean_nis / NIS_EXCURSION_DIVISOR))
         excursions = sum(1 for v in nis_values if v / NIS_EXCURSION_DIVISOR >= 0.8)
         if excursions:
-            reasons.append(f"⚠ GNSS/navigation consistency degraded ({excursions} innovation excursion(s) detected)")
+            reasons.append(
+                f"⚠ GNSS/navigation consistency degraded "
+                f"({excursions} innovation excursion(s) detected)"
+            )
         else:
             reasons.append("✓ Navigation consistency (NIS) within expected bounds")
     elif gnss_values:
         nav_score = sum(gnss_values) / len(gnss_values)
-        reasons.append(f"GNSS quality reported directly (mean={nav_score:.2f}); no NIS consistency signal available")
+        reasons.append(
+            f"GNSS quality reported directly (mean={nav_score:.2f}); "
+            "no NIS consistency signal available"
+        )
     else:
         nav_score = 0.5
-        reasons.append("⚠ No GNSS quality or navigation consistency data available; neutral value used")
+        reasons.append(
+            "⚠ No GNSS quality or navigation consistency data available; neutral value used"
+        )
     components["navigation"] = nav_score
 
     # Sensor consistency: camera confidence as a proxy signal.
-    camera_values = [r["camera_confidence"] for r in telemetry_rows if r.get("camera_confidence") is not None]
+    camera_values = [
+        r["camera_confidence"] for r in telemetry_rows if r.get("camera_confidence") is not None
+    ]
     if camera_values:
         sensor_score = sum(camera_values) / len(camera_values)
-        reasons.append("✓ Camera data complete" if sensor_score >= 0.7 else "⚠ Camera confidence below expected range")
+        reasons.append(
+            "✓ Camera data complete"
+            if sensor_score >= 0.7
+            else "⚠ Camera confidence below expected range"
+        )
     else:
         sensor_score = 0.5
         reasons.append("⚠ No sensor-confidence telemetry reported; neutral value used")
@@ -146,7 +175,9 @@ def assess_mission_reliability(
 
     # Telemetry continuity: packet loss/delay.
     loss_count = sum(1 for r in telemetry_rows if r.get("packet_loss"))
-    delay_values = [r["packet_delay_s"] for r in telemetry_rows if r.get("packet_delay_s") is not None]
+    delay_values = [
+        r["packet_delay_s"] for r in telemetry_rows if r.get("packet_delay_s") is not None
+    ]
     excessive_delay = sum(1 for v in delay_values if v > MAX_PACKET_DELAY_S)
     gaps = loss_count + excessive_delay
     continuity_score = max(0.0, 1.0 - min(1.0, gaps / max(len(telemetry_rows), 1)))
@@ -157,33 +188,55 @@ def assess_mission_reliability(
     components["telemetry_continuity"] = continuity_score
 
     # Battery/power.
-    battery_values = [r["battery_percent"] for r in telemetry_rows if r.get("battery_percent") is not None]
+    battery_values = [
+        r["battery_percent"] for r in telemetry_rows if r.get("battery_percent") is not None
+    ]
     if battery_values:
         min_battery = min(battery_values)
         battery_score = min_battery / 100.0
-        reasons.append("✓ Battery remained within expected operating range" if min_battery >= 20 else f"⚠ Battery dropped to {min_battery:.0f}% during mission")
+        reasons.append(
+            "✓ Battery remained within expected operating range"
+            if min_battery >= 20
+            else f"⚠ Battery dropped to {min_battery:.0f}% during mission"
+        )
     else:
         battery_score = 0.5
         reasons.append("⚠ No battery telemetry reported; neutral value used")
     components["battery_power"] = battery_score
 
     # Data completeness: fraction of expected fields present across rows.
-    tracked_fields = ("gnss_quality", "camera_confidence", "battery_percent", "normalized_innovation_squared")
+    tracked_fields = (
+        "gnss_quality",
+        "camera_confidence",
+        "battery_percent",
+        "normalized_innovation_squared",
+    )
     present = sum(1 for r in telemetry_rows for f in tracked_fields if r.get(f) is not None)
     possible = len(telemetry_rows) * len(tracked_fields)
     completeness_score = present / possible if possible else 0.0
     components["data_completeness"] = completeness_score
-    reasons.append(f"Data completeness: {completeness_score * 100:.0f}% of tracked telemetry fields present across {len(telemetry_rows)} record(s)")
+    reasons.append(
+        f"Data completeness: {completeness_score * 100:.0f}% of tracked telemetry fields "
+        f"present across {len(telemetry_rows)} record(s)"
+    )
 
     combined = _combine(components, weights)
     score = round(combined["total"] * 100, 1)
-    level = ReliabilityLevel.HIGH if score >= 75 else ReliabilityLevel.MEDIUM if score >= 50 else ReliabilityLevel.LOW
+    level = (
+        ReliabilityLevel.HIGH
+        if score >= 75
+        else ReliabilityLevel.MEDIUM
+        if score >= 50
+        else ReliabilityLevel.LOW
+    )
 
     return {
         "level": level,
         "score": score,
         "components": {k: round(v, 3) for k, v in components.items()},
-        "weighted_components": {k: round(v, 3) for k, v in combined.items() if k.startswith("weighted_")},
+        "weighted_components": {
+            k: round(v, 3) for k, v in combined.items() if k.startswith("weighted_")
+        },
         "formula": " + ".join(f"{w:.2f}×{k}" for k, w in asdict(weights).items()),
         "reasons": reasons,
         "is_simulation": is_simulation,

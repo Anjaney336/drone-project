@@ -29,11 +29,24 @@ mixed with data you provide.
 |---|---|---|---|
 | YOLOv8n (`damage_detection_yolov8n_baseline`) | Infrastructure defect detection | mAP50 0.440, mAP50-95 0.258, precision 0.448, recall 0.496 | READY |
 | TinyUNet (`crack_segmentation_tinyunet_baseline`) | Binary crack segmentation | Mean IoU 0.501, mean Dice 0.637, precision 0.807, recall 0.600 | READY |
-| Agriculture (MH-SoyaHealthVision) | Crop-health classification | — | **NOT READY** — dataset download/integrity verification in progress, no model trained |
+| Agriculture (MH-SoyaHealthVision, MobileNetV3-Small) | Crop-health classification (healthy/rust/mosaic/pest) | — | Dataset downloaded and integrity-verified; training in progress — check `GET /api/v1/models/status` for current state, **not claimed READY until it is** |
 
 Full diagnosis, limitations, and reproduction commands: `docs/model_card.md` (per checkpoint),
-`docs/yolo_baseline_diagnosis.md`, `docs/crack_segmentation_validation.md`. These are held-out
-**test-split** metrics — not field-validated accuracy, stated explicitly everywhere they appear.
+`docs/yolo_baseline_diagnosis.md`, `docs/crack_segmentation_validation.md`,
+`docs/agriculture_model_selection.md`. These are held-out **test-split** metrics — not
+field-validated accuracy, stated explicitly everywhere they appear (see `docs/validation_scope.md`).
+
+## Dataset availability
+
+| Dataset | Status | In Git | LFS | Download Script | Model |
+|---|---|---|---|---|---|
+| Damage Detection (1,500 img, bbox) | Local, license unconfirmed | 15-file sample only | No | Manual acquisition — no verified source (see `docs/datasets/available_datasets.md`) | `damage_detection_yolov8n_baseline` (READY) |
+| UAV Crack Segmentation (315 img, masks) | Local, license unconfirmed | 15-file sample only | No | Same as above | `crack_segmentation_tinyunet_baseline` (READY) |
+| MH-SoyaHealthVision (agriculture, CC BY 4.0) | Downloaded, integrity-verified | No (9.75GB, too large) | No | `python scripts/download_datasets.py` (resumable) | `agriculture_uav_mobilenetv3_baseline` (training) |
+| Light-field `.npy` (4.4GB) | Quarantined, origin unknown | No | No | N/A | Not used by any model |
+
+Full per-dataset detail: `docs/datasets/available_datasets.md`. Verify what you have locally with
+`python scripts/verify_datasets.py`. New here? Start at `docs/judge_quickstart.md`.
 
 ## Run in three commands
 

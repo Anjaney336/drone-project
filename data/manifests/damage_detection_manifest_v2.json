@@ -1,0 +1,15 @@
+{
+  "name": "damage_detection",
+  "version": "local-1",
+  "source": "unverified - raw folder acquired without accompanying README/classes.txt/LICENSE; upstream origin not retained (see docs/datasets/available_datasets.md)",
+  "license": "UNCONFIRMED - do not redistribute the full dataset publicly until a human confirms the original source and license",
+  "task": "object_detection",
+  "domain": "infrastructure (concrete defects)",
+  "file_count": 3000,
+  "image_count": 1500,
+  "sha256_fingerprint": "e0b952e4cf7c0dd8f7ae87a37afdd290ef64da73af01deca34fb7867396d34cd",
+  "checksums_file": "data/manifests/damage_detection_checksums.sha256",
+  "status": "READY_LOCAL_LICENSE_UNCONFIRMED",
+  "split_seed": 20260820,
+  "generated_at": "2026-08-20T21:02:43.950510+00:00"
+}

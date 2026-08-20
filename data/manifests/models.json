@@ -1,0 +1,72 @@
+{
+  "models": [
+    {
+      "name": "damage_detection_yolov8n_baseline",
+      "path": "artifacts/experiments/damage_detection_yolov8n_baseline/weights/best.pt",
+      "architecture": "YOLOv8n",
+      "dataset": "damage_detection",
+      "dataset_version": "local-1",
+      "seed": 20260820,
+      "config": "configs/training/damage_detection.yaml",
+      "test_metrics": {
+        "mAP50": 0.44,
+        "mAP50_95": 0.258,
+        "precision": 0.448,
+        "recall": 0.496
+      },
+      "status": "READY",
+      "sha256": "f07d96150c4fc0648769dfe59fa54a879c9a4d5399583265d64c4e61245f2f9c",
+      "size_bytes": 6214179
+    },
+    {
+      "name": "damage_detection_yolov8n_exp_a_imgsz640",
+      "path": "artifacts/experiments/damage_detection_yolov8n_exp_a_imgsz640/weights/best.pt",
+      "architecture": "YOLOv8n",
+      "dataset": "damage_detection",
+      "dataset_version": "local-1",
+      "seed": 20260820,
+      "config": "configs/training/damage_detection_exp_a_imgsz640.yaml",
+      "test_metrics": {
+        "mAP50": 0.467,
+        "mAP50_95": 0.27,
+        "precision": 0.486,
+        "recall": 0.48
+      },
+      "status": "READY (experimental, not the registry default)",
+      "sha256": "1da52096e74fe2e20aa32ebb1202ebf372c0c82a2e8503ab9eceab0d6faf4c72",
+      "size_bytes": 6245027
+    },
+    {
+      "name": "crack_segmentation_tinyunet_baseline",
+      "path": "artifacts/experiments/crack_segmentation_tinyunet_baseline/best_model.pt",
+      "architecture": "TinyUNet (custom, 16 base channels)",
+      "dataset": "uav_crack_segmentation",
+      "dataset_version": "local-1",
+      "seed": 20260820,
+      "config": "configs/training/crack_segmentation.yaml",
+      "test_metrics": {
+        "mean_iou": 0.501,
+        "mean_dice": 0.637,
+        "precision": 0.807,
+        "recall": 0.6
+      },
+      "status": "READY",
+      "sha256": "ccce2fa44cbf5ddb348a8f4c6e13dc93baf6e3bfdde75dbf2bc9c55419dc03cd",
+      "size_bytes": 1972072
+    },
+    {
+      "name": "yolov8n_base_weights",
+      "path": "yolov8n.pt",
+      "architecture": "YOLOv8n (stock COCO-pretrained, Ultralytics)",
+      "dataset": "COCO (upstream pretraining, not by AERIS)",
+      "dataset_version": "n/a",
+      "seed": null,
+      "config": null,
+      "test_metrics": null,
+      "status": "BASE_WEIGHTS_ONLY - not used directly for inference; fine-tuned into the checkpoints above",
+      "license": "AGPL-3.0 (Ultralytics) - see docs/licensing.md",
+      "sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+      "size_bytes": 6549796
+    }
+  ]
+}

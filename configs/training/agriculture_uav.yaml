@@ -1,0 +1,26 @@
+experiment_name: agriculture_uav_mobilenetv3_baseline
+task_type: image_classification
+seed: 20260820
+data_config: data/manifests/agriculture_uav_manifest.json
+model:
+  architecture: mobilenet_v3_small
+  pretrained: imagenet
+  input_size: 224
+training:
+  epochs: 10
+  batch_size: 16
+  learning_rate: 0.0005
+  early_stopping_patience: 4
+  augmentation:
+    train_only: true
+    horizontal_flip: 0.5
+output:
+  run_dir: artifacts/experiments/agriculture_uav_mobilenetv3_baseline
+notes: >
+  CPU-only baseline. UAV subset only (2,842 images, 4 classes: healthy,
+  rust, mosaic, pest_attack) - the ground-level leaf-closeup split is
+  excluded, per AERIS being a drone mission platform (see
+  docs/agriculture_model_selection.md). Group-aware split by flight
+  session prevents near-duplicate video frames leaking across
+  train/val/test. Real class imbalance in the source data (healthy is
+  the minority class) is not corrected in this baseline.

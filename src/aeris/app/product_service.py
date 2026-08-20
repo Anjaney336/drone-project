@@ -17,7 +17,6 @@ from aeris.app.product_models import (
     DroneCreate,
     HumanReviewCreate,
     MissionIngest,
-    ModelStatus,
     ProductMissionCreate,
     SyncRequest,
     TelemetryIngest,
@@ -296,14 +295,18 @@ class ProductStore:
                 );
                 """
             )
-            mission_columns = {row[1] for row in db.execute("PRAGMA table_info(missions)").fetchall()}
+            mission_columns = {
+                row[1] for row in db.execute("PRAGMA table_info(missions)").fetchall()
+            }
             if "domain" not in mission_columns:
                 db.execute(
                     "ALTER TABLE missions ADD COLUMN domain TEXT NOT NULL DEFAULT 'infrastructure'"
                 )
             if "drone_id" not in mission_columns:
                 db.execute("ALTER TABLE missions ADD COLUMN drone_id TEXT")
-            finding_columns = {row[1] for row in db.execute("PRAGMA table_info(ai_findings)").fetchall()}
+            finding_columns = {
+                row[1] for row in db.execute("PRAGMA table_info(ai_findings)").fetchall()
+            }
             if "regions" not in finding_columns:
                 db.execute("ALTER TABLE ai_findings ADD COLUMN regions TEXT")
             count = db.execute("SELECT COUNT(*) FROM assets").fetchone()[0]
@@ -931,7 +934,9 @@ class ProductStore:
                 raise KeyError(f"Mission {mission_id} was not found")
             for record in records:
                 if record.mission_id != mission_id:
-                    raise ValueError("All telemetry records in one ingest call must share a mission_id")
+                    raise ValueError(
+                        "All telemetry records in one ingest call must share a mission_id"
+                    )
                 db.execute(
                     "INSERT INTO telemetry_records VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     (
@@ -983,7 +988,12 @@ class ProductStore:
                     when,
                 ),
             )
-        return {**result, "assessment_id": assessment_id, "mission_id": mission_id, "timestamp": when}
+        return {
+            **result,
+            "assessment_id": assessment_id,
+            "mission_id": mission_id,
+            "timestamp": when,
+        }
 
     def get_mission_reliability(self, mission_id: str) -> dict:
         with self._connect() as db:
@@ -1048,13 +1058,17 @@ class ProductStore:
     @staticmethod
     def _attach_interpretation(finding: dict) -> dict:
         finding.update(
-            interpret_finding(finding["label"], finding["confidence"], finding["mission_reliability"])
+            interpret_finding(
+                finding["label"], finding["confidence"], finding["mission_reliability"]
+            )
         )
         return finding
 
     def get_ai_finding(self, finding_id: str) -> dict:
         with self._connect() as db:
-            row = db.execute("SELECT * FROM ai_findings WHERE finding_id=?", (finding_id,)).fetchone()
+            row = db.execute(
+                "SELECT * FROM ai_findings WHERE finding_id=?", (finding_id,)
+            ).fetchone()
             if not row:
                 raise KeyError(f"Finding {finding_id} was not found")
             result = self._parse_finding(dict(row))
@@ -1074,7 +1088,9 @@ class ProductStore:
             params.append(mission_id)
         query += " ORDER BY timestamp DESC"
         with self._connect() as db:
-            return [self._parse_finding(r) for r in self._rows(db.execute(query, params).fetchall())]
+            return [
+                self._parse_finding(r) for r in self._rows(db.execute(query, params).fetchall())
+            ]
 
     def review_queue(self) -> list[dict]:
         """Findings awaiting human review, annotated with mission reliability so a
