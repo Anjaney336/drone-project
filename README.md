@@ -1,27 +1,37 @@
 # AERIS — AI-Enabled Drone Mission Intelligence
 
-AERIS turns a drone inspection mission — images, telemetry, and mission metadata a user actually
-uploads — into a real AI-assisted finding, a mission reliability assessment, an explainable
-priority, and a human review workflow. It answers four questions: what did the drone see, can the
-mission data be trusted, how urgent is it, and what should a human do next.
+Drones can collect thousands of images, videos and telemetry records, but authorities still need
+humans to manually determine what matters. AERIS transforms drone mission data into AI-assisted
+findings, evaluates the reliability of the mission data, prioritizes assets requiring attention,
+and routes evidence to human reviewers.
 
-## This is a real, working, user-driven workflow — not a demo shell
+It answers four questions per mission: **what did the drone see**, **can the mission data be
+trusted**, **how urgent is it**, and **what should a human do next**.
+
+## The workflow
 
 Open the app, click **New Mission**, pick a domain, fill in mission info, attach your own inspection
 image(s) and (optionally) a telemetry CSV/JSON, and click **Create & Analyze Mission**. AERIS then:
 
-1. stores your upload (`POST /api/v1/missions/{id}/media`, no server file path required);
-2. runs a **real trained model** on it — YOLOv8n for defect detection, TinyUNet for crack
-   segmentation — and returns real bounding boxes and confidence scores, never a fabricated finding;
-3. scores mission reliability from whatever telemetry you actually provided, honestly marking any
-   dimension `NOT AVAILABLE` rather than defaulting it to good;
+1. stores your upload (`POST /api/v1/missions/{id}/media`, no server file path required), validated
+   against real JPEG/PNG signatures rather than a declared content type;
+2. runs a trained model on it — YOLOv8n for defect detection, TinyUNet for crack segmentation —
+   returning real bounding boxes and confidence scores. If no checkpoint is published the model
+   reports `NOT_TRAINED` and analysis is disabled; it never substitutes a fabricated finding.
+   See [Checkpoints are not produced by cloning](#checkpoints-are-not-produced-by-cloning);
+3. scores mission reliability from whatever telemetry you actually provided. A dimension with no
+   supporting telemetry is reported `NOT AVAILABLE` and **excluded from the score**, with the
+   remaining weights renormalised — a file carrying only timestamps returns `UNKNOWN`, not a
+   middling number that looks like a measurement;
 4. shows a one-screen Mission Analysis Report (status, findings, drone health, reliability,
    priority, recommended action) before the detailed breakdown;
-5. routes the finding to Human Review — AI never marks anything "Confirmed," only a reviewer does.
+5. routes the finding to Human Review. AI never marks anything "Confirmed" — only a reviewer does,
+   `CONFIRMED` and `REJECTED` are terminal, and every verdict is appended to an audit trail.
 
-Seeded demonstration records (10 assets, 4 missions, seed 2026) remain in the system for the
-Government Decision Center and are tagged `DEMONSTRATION` everywhere they appear — they are never
-mixed with data you provide.
+Seeded demonstration records (10 assets, 4 missions, seed 2026) ship for the Government Decision
+Center. They carry `origin: demonstration` and are never relabelled as yours; once you add your own
+data the aggregate views report the provenance mix (`mixed`, with a per-origin breakdown) rather
+than describing everything as demonstration data.
 
 ## Active models (real, measured, not placeholders)
 
@@ -60,22 +70,29 @@ they appear.
 
 ```powershell
 python -m venv .venv
-.venv\Scripts\python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.lock
+.venv\Scripts\python -m pip install -r requirements.lock
 .venv\Scripts\python -m uvicorn aeris.app.api:app --host 127.0.0.1 --port 8501
+```
+
+```bash
+python -m venv .venv
+.venv/bin/python -m pip install -r requirements.lock
+.venv/bin/python -m uvicorn aeris.app.api:app --host 127.0.0.1 --port 8501
 ```
 
 Open <http://127.0.0.1:8501/>. OpenAPI documentation is at
 <http://127.0.0.1:8501/docs>.
 
 For an editable install, run
-`.venv\Scripts\python -m pip install --no-build-isolation --no-deps -e .` first. The
-`--extra-index-url` pins CPU-only torch/torchvision wheels so this does not pull a multi-gigabyte
-CUDA build.
+`.venv\Scripts\python -m pip install --no-build-isolation --no-deps -e .` first.
+`requirements.lock` carries its own `--extra-index-url` for CPU-only torch/torchvision wheels, so
+installing it never pulls a multi-gigabyte CUDA build. 8501 is the one canonical port — README,
+Dockerfile, `.env.example`, both console scripts and every demo script agree on it.
 
 ## Reproduce the evidence
 
 ```powershell
-.venv\Scripts\python scripts/export_demo_dataset.py
+.venv\Scripts\python scripts/export_demo_dataset.py --check
 .venv\Scripts\python -m aeris.benchmark --seed 7 --trials 100 --ablation --output artifacts/benchmark.json
 .venv\Scripts\python scripts/run_demo_scenario.py
 .venv\Scripts\python -m ruff check .
@@ -84,7 +101,9 @@ CUDA build.
 
 The seeded product dataset is committed at
 [`data/demo/aeris_demo_seed_2026.json`](data/demo/aeris_demo_seed_2026.json). Its origin, source,
-timestamp, and seed are explicit on every collection. `scripts/run_demo_scenario.py` runs the full
+timestamp, and seed are explicit on every collection, and its SHA-256 is pinned in
+[`docs/dataset.md`](docs/dataset.md). `--check` regenerates it and fails if the committed bytes
+drift; CI runs that on every push, so the integrity claim is enforced rather than asserted. `scripts/run_demo_scenario.py` runs the full
 mission→inference→reliability→review workflow against a real held-out test image in one command.
 
 ## Validated engineering core
