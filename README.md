@@ -110,6 +110,13 @@ committed — reproduce it with the `aeris-benchmark` command under
 - Digital Twin telemetry cannot be submitted through the field-ingestion schema.
 - The UI computes presentation geometry only; operational values come from API records.
 - AERIS recommends actions but does not issue drone, vehicle, or maintenance hardware commands.
+- A review verdict is an accountability record: CONFIRMED and REJECTED are terminal and
+  cannot be silently overwritten. The reviewer name is **self-asserted, not
+  authenticated** — the prototype has no login, so the audit trail records who claimed to
+  review, not who provably did.
+- State-changing requests can be guarded with a shared secret (`AERIS_API_TOKEN`);
+  `GET /api/v1/health` reports `write_protection` so an unguarded deployment is visibly
+  unguarded. Reads are always open.
 
 Architecture, API, demo, data, and validation details are in
 [`docs/architecture.md`](docs/architecture.md), [`docs/icd.md`](docs/icd.md),

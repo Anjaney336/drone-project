@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import json
+import os
 import uuid
 from pathlib import Path
 
 import numpy as np
-from fastapi import FastAPI, HTTPException, UploadFile
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, HTTPException, Request, UploadFile
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -40,6 +41,25 @@ app = FastAPI(title="AERIS Infrastructure Intelligence API", version="1.0.0")
 store = MissionStore()
 product_store = ProductStore()
 
+# Optional shared-secret guard for state-changing requests. Unset by default so the
+# demo workflow needs no setup, but the absence of a guard is *reported* by /health
+# rather than left implicit — an unauthenticated deployment should be visibly
+# unauthenticated. This is a deployment guard, not user authentication: it does not
+# identify a reviewer (see docs/hazard_log.md).
+API_TOKEN = os.environ.get("AERIS_API_TOKEN") or None
+MUTATING_METHODS = {"POST", "PATCH", "PUT", "DELETE"}
+
+
+@app.middleware("http")
+async def require_token_for_mutations(request: Request, call_next):
+    if API_TOKEN and request.method in MUTATING_METHODS:
+        if request.headers.get("X-AERIS-Token") != API_TOKEN:
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Missing or invalid X-AERIS-Token header"},
+            )
+    return await call_next(request)
+
 
 @app.get("/api/v1/health")
 def health() -> dict:
@@ -54,6 +74,7 @@ def health() -> dict:
         "status": "ok" if db_ok else "degraded",
         "service": "aeris-api",
         "database": "ok" if db_ok else "unavailable",
+        "write_protection": "token" if API_TOKEN else "none",
     }
 
 
@@ -389,18 +410,45 @@ MEDIA_ROOTS = [
 ]
 ALLOWED_UPLOAD_TYPES = {"image/jpeg", "image/png"}
 MAX_UPLOAD_BYTES = 15 * 1024 * 1024
+UPLOAD_CHUNK_BYTES = 1024 * 1024
+# A declared Content-Type is whatever the client typed. These are the real signatures.
+IMAGE_MAGIC = {
+    "image/jpeg": (b"\xff\xd8\xff",),
+    "image/png": (b"\x89PNG\r\n\x1a\n",),
+}
 
 
 @app.get("/api/v1/media")
 def get_media(path: str) -> FileResponse:
-    """Serves mission-referenced imagery for display. Restricted to data/ subdirectories
-    to prevent path traversal outside the dataset roots."""
+    """Serves mission-referenced imagery for display, restricted to the dataset roots."""
     candidate = (ROOT / path).resolve()
-    if not any(str(candidate).startswith(str(root.resolve())) for root in MEDIA_ROOTS):
+    # Path.is_relative_to compares path components. The previous string-prefix check
+    # accepted any sibling whose name merely started with a root's name, so a
+    # `data/demolition/` directory satisfied the `data/demo` root.
+    if not any(candidate.is_relative_to(root.resolve()) for root in MEDIA_ROOTS):
         raise HTTPException(status_code=403, detail="Path is outside permitted media roots")
     if not candidate.is_file():
         raise HTTPException(status_code=404, detail="Media file not found")
     return FileResponse(candidate)
+
+
+async def _read_within_limit(file: UploadFile, limit: int) -> bytes:
+    """Read an upload in chunks, aborting as soon as it exceeds the limit.
+
+    Reading the whole body first and checking its length afterwards means the limit
+    bounds nothing: an arbitrarily large upload is fully buffered in memory before it
+    is rejected.
+    """
+    chunks: list[bytes] = []
+    total = 0
+    while chunk := await file.read(UPLOAD_CHUNK_BYTES):
+        total += len(chunk)
+        if total > limit:
+            raise HTTPException(
+                status_code=413, detail=f"File exceeds {limit // (1024 * 1024)}MB limit"
+            )
+        chunks.append(chunk)
+    return b"".join(chunks)
 
 
 @app.post("/api/v1/missions/{mission_id}/media")
@@ -415,10 +463,12 @@ async def upload_mission_media(mission_id: str, file: UploadFile) -> dict:
             detail=f"Unsupported content type: {file.content_type}. "
             f"Allowed: {sorted(ALLOWED_UPLOAD_TYPES)}",
         )
-    body = await file.read()
-    if len(body) > MAX_UPLOAD_BYTES:
+    body = await _read_within_limit(file, MAX_UPLOAD_BYTES)
+    if not body.startswith(IMAGE_MAGIC[file.content_type]):
         raise HTTPException(
-            status_code=413, detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024 * 1024)}MB limit"
+            status_code=415,
+            detail=f"File content is not a valid {file.content_type} image, "
+            "regardless of the declared content type.",
         )
     ext = ".jpg" if file.content_type == "image/jpeg" else ".png"
     mission_dir = UPLOAD_ROOT / mission_id
@@ -446,11 +496,7 @@ async def upload_mission_telemetry(mission_id: str, file: UploadFile) -> dict:
     from aeris.app.telemetry_import import parse_telemetry_csv, parse_telemetry_json
 
     _product_call(lambda: product_store.get_mission(mission_id))
-    body = await file.read()
-    if len(body) > MAX_UPLOAD_BYTES:
-        raise HTTPException(
-            status_code=413, detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024 * 1024)}MB limit"
-        )
+    body = await _read_within_limit(file, MAX_UPLOAD_BYTES)
     name = (file.filename or "").lower()
     try:
         if name.endswith(".json"):
