@@ -68,10 +68,23 @@ def test_benchmark_endpoint_reads_only_authoritative_artifact(tmp_path, monkeypa
 
 
 def test_synthetic_preview_is_explicitly_tagged():
+    """The origin assertion must not pass vacuously.
+
+    data/processed is gitignored, so on a fresh clone this endpoint returns an empty
+    record list and `all(...)` over it is trivially true — the test asserted nothing.
+    It now requires the DATA UNAVAILABLE contract when the file is absent, and only
+    checks per-row provenance when there are actually rows to check.
+    """
     response = TestClient(app).get("/synthetic-data-preview")
     assert response.status_code == 200
     payload = response.json()
     assert payload["provenance"] == "synthetic"
+    if not api.SYNTHETIC_HELD_OUT_PATH.exists():
+        assert payload["data_status"] == "DATA UNAVAILABLE"
+        assert payload["records"] == []
+        return
+    assert payload["data_status"] == "AVAILABLE"
+    assert payload["records"], "held-out file exists but no records were returned"
     assert all(row["origin"] in {"synthetic", "synthetic_fault"} for row in payload["records"])
 
 

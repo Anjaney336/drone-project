@@ -39,7 +39,10 @@ from aeris.models import DataOrigin
 
 app = FastAPI(title="AERIS Infrastructure Intelligence API", version="1.0.0")
 store = MissionStore()
-product_store = ProductStore()
+# AERIS_DB_PATH lets a deployment (or the test suite) place the database somewhere other
+# than the repository's artifacts/ directory.
+_DB_PATH = os.environ.get("AERIS_DB_PATH")
+product_store = ProductStore(Path(_DB_PATH)) if _DB_PATH else ProductStore()
 
 # Optional shared-secret guard for state-changing requests. Unset by default so the
 # demo workflow needs no setup, but the absence of a guard is *reported* by /health
