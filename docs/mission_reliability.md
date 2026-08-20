@@ -57,7 +57,7 @@ Data completeness: 88% of tracked telemetry fields present across 2 record(s)
 ```
 (This is real output from `python -c "..."` exercising `ProductStore.ingest_telemetry` against two
 hand-constructed telemetry rows — see the smoke test in
-[`artifacts/product_validation_report.md`](../artifacts/product_validation_report.md) — not a
+`artifacts/product_validation_report.md` (regenerated, not committed) — not a
 mocked example.)
 
 ## Real vs. simulated telemetry

@@ -19,6 +19,23 @@ from aeris.app.product_models import Domain, ModelStatus
 
 ROOT = Path(__file__).resolve().parents[3]
 
+# Two locations hold a checkpoint, and the distinction is deliberate:
+#   models/<experiment>/          published, version-controlled, ships with a clone
+#   artifacts/experiments/<name>/ raw output of a local training run (gitignored)
+# A published checkpoint wins so that cloning the repository is enough to get a
+# working model, while a developer who retrains locally still picks up their own
+# run without having to publish it first.
+MODELS_ROOT = ROOT / "models"
+TRAINING_RUNS_ROOT = ROOT / "artifacts" / "experiments"
+
+
+def resolve_run_dir(experiment_name: str) -> Path:
+    """Published checkpoint if one is committed, else the local training run."""
+    published = MODELS_ROOT / experiment_name
+    if (published / "status.json").exists():
+        return published
+    return TRAINING_RUNS_ROOT / experiment_name
+
 
 @dataclass(frozen=True)
 class ModelPrediction:
@@ -36,7 +53,11 @@ class ModelAdapter(ABC):
     task_type: str
     model_name: str
     model_version: str
-    run_dir: Path
+    experiment_name: str
+
+    def __init__(self) -> None:
+        self.run_dir: Path = resolve_run_dir(self.experiment_name)
+        self._model = None
 
     def status(self) -> ModelStatus:
         status_file = self.run_dir / "status.json"
@@ -83,9 +104,7 @@ class InfrastructureDetectionModel(ModelAdapter):
     task_type = "object_detection"
     model_name = "damage_detection_yolov8n_baseline"
     model_version = "baseline-1"
-    run_dir = ROOT / "artifacts" / "experiments" / "damage_detection_yolov8n_baseline"
-
-    _model = None
+    experiment_name = "damage_detection_yolov8n_baseline"
 
     def _load(self):
         if self._model is None:
@@ -129,9 +148,7 @@ class CrackSegmentationModel(ModelAdapter):
     task_type = "semantic_segmentation_binary"
     model_name = "crack_segmentation_tinyunet_baseline"
     model_version = "baseline-1"
-    run_dir = ROOT / "artifacts" / "experiments" / "crack_segmentation_tinyunet_baseline"
-
-    _model = None
+    experiment_name = "crack_segmentation_tinyunet_baseline"
 
     def _load(self):
         if self._model is None:
@@ -186,7 +203,7 @@ class AgricultureModel(ModelAdapter):
     task_type = "image_classification"
     model_name = "agriculture_mobilenetv3_baseline"
     model_version = "unbuilt"
-    run_dir = ROOT / "artifacts" / "experiments" / "agriculture_mobilenetv3_baseline"
+    experiment_name = "agriculture_mobilenetv3_baseline"
 
     def analyze(self, image_path: str) -> list[ModelPrediction]:
         self._require_ready()
