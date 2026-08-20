@@ -34,7 +34,7 @@ yet a single reproducible script a judge could run unsupervised.
 
 ## What would move this from 6.5 toward 9
 
-See `docs/road_to_10.md` for the prioritized list. In one sentence: **raise AI/ML quality
+In one sentence: **raise AI/ML quality
 credibly (or reframe it honestly as "baseline, diagnosed, with a clear improvement path"), ship
 agriculture as a second real working domain, and make the flagship demo a single reproducible
 script** — those three changes address the three lowest-scoring categories (AI/ML quality, demo

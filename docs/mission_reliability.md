@@ -6,8 +6,7 @@ urgent is it?" (that's `priority.py`, unchanged). Implementation:
 
 ## Why this exists, and what it reuses
 
-Per [`docs/migration_audit.md`](migration_audit.md) and
-[`docs/application_migration_plan.md`](application_migration_plan.md), the counter-drone-era
+The counter-drone-era
 `aeris.autonomy.safety.risk.combine_risk`/`RiskWeights` pattern — a generic weighted decomposition
 with named components, each independently inspectable — is directly reused as `_combine` in the
 reliability module. The dimensions themselves are new (navigation/sensor/telemetry/battery/

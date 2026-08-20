@@ -41,7 +41,7 @@ injected-fault label accompany every simulation row.
 `data/demo/aeris_demo_seed_2026.json` is the authoritative product seed. Generate it with
 `scripts/export_demo_dataset.py`. Its fixed source is `aeris.demo.seed.v1`, seed is 2026, and
 generation timestamp is fixed so byte output is reproducible. SHA-256 for this revision is
-`bbccb2e42181940ab12d317541ec955524fe50e6f6fbc3d3a0a6aab340908b87`.
+`c59909c02bc94df33244c783b54c809c7918aa97e699eee2ea3fab74ac201c65`.
 
 Reproducibility is enforced, not just asserted. `scripts/export_demo_dataset.py --check`
 regenerates the dataset and fails if the committed file differs; CI runs it on every push.
