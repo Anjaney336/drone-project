@@ -204,6 +204,20 @@ DEMO_OBSERVATIONS = [
 ]
 
 
+# A verdict is an accountability record, not a mutable field. PENDING findings can go
+# anywhere; NEEDS_REINSPECTION and ESCALATED are waypoints that must still settle; and
+# CONFIRMED/REJECTED are terminal, so a settled verdict cannot be quietly overwritten by
+# a later caller. This mirrors the action state machine, which already refuses to reopen
+# a RESOLVED action.
+REVIEW_TRANSITIONS: dict[str, set[str]] = {
+    "PENDING": {"CONFIRMED", "REJECTED", "NEEDS_REINSPECTION", "ESCALATED"},
+    "NEEDS_REINSPECTION": {"CONFIRMED", "REJECTED", "ESCALATED"},
+    "ESCALATED": {"CONFIRMED", "REJECTED"},
+    "CONFIRMED": set(),
+    "REJECTED": set(),
+}
+
+
 class ProductStore:
     def __init__(self, path: Path = Path("artifacts/aeris_product.db")) -> None:
         self.path = path
@@ -1168,10 +1182,23 @@ class ProductStore:
 
     def submit_human_review(self, finding_id: str, request: HumanReviewCreate) -> dict:
         with self._connect() as db:
-            if not db.execute(
-                "SELECT 1 FROM ai_findings WHERE finding_id=?", (finding_id,)
-            ).fetchone():
+            row = db.execute(
+                "SELECT review_status FROM ai_findings WHERE finding_id=?", (finding_id,)
+            ).fetchone()
+            if not row:
                 raise KeyError(f"Finding {finding_id} was not found")
+            current = row["review_status"]
+            allowed = REVIEW_TRANSITIONS.get(current, set())
+            if request.verdict not in allowed:
+                if not allowed:
+                    raise ValueError(
+                        f"Finding {finding_id} is already {current}; a settled verdict cannot "
+                        f"be changed. Raise a new finding if the asset needs re-inspection."
+                    )
+                raise ValueError(
+                    f"Cannot move finding {finding_id} from {current} to {request.verdict}. "
+                    f"Allowed from {current}: {', '.join(sorted(allowed))}."
+                )
             db.execute(
                 "INSERT INTO human_reviews VALUES (?,?,?,?,?,?)",
                 (
