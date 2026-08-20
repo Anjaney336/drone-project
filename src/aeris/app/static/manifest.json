@@ -1,0 +1,8 @@
+{
+  "name": "AERIS Field Intelligence",
+  "short_name": "AERIS",
+  "start_url": "/#field",
+  "display": "standalone",
+  "background_color": "#f4f7fa",
+  "theme_color": "#10263d"
+}

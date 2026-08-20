@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10263d">
+  <title>AERIS · Drone Mission Intelligence</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#home"><span class="brand-mark">A</span><span><b>AERIS</b><small>Drone Mission Intelligence</small></span></a>
+    <nav id="nav">
+      <a href="#home" data-page="home" class="active"><i>⌂</i> Home</a>
+      <a href="#newmission" data-page="newmission" class="nav-primary"><i>+</i> New Mission</a>
+      <a href="#missions" data-page="missions"><i>◈</i> Missions</a>
+      <a href="#field" data-page="field"><i>⇅</i> Field Capture <span id="queue-badge" class="badge hide">0</span></a>
+      <span class="nav-section">Government</span>
+      <a href="#actions" data-page="actions"><i>✓</i> Decision Center</a>
+      <a href="#review" data-page="review"><i>⚑</i> Human Review Queue</a>
+      <a href="#dronehealth" data-page="dronehealth"><i>⛁</i> Drone Health</a>
+      <a href="#map" data-page="map"><i>⌖</i> Infrastructure Map</a>
+      <a href="#regions" data-page="regions"><i>▦</i> Regional Intelligence</a>
+      <span class="nav-section">Engineering</span>
+      <a href="#command" data-page="command"><i>▤</i> Executive Metrics (demo data)</a>
+      <a href="#digital" data-page="digital"><i>◇</i> Digital Twin</a>
+      <a href="#technical" data-page="technical"><i>⌁</i> Technical Intelligence</a>
+    </nav>
+    <div class="provenance-card"><span class="dot"></span><b>Your mission data is real</b><small>Only clearly-tagged demo records use seed 2026</small></div>
+  </aside>
+  <header class="topbar">
+    <button id="menu" aria-label="Open navigation">☰</button>
+    <div><span class="eyebrow">Drone mission intelligence</span><h1 id="page-title">AERIS</h1></div>
+    <div class="top-actions"><span id="backend-status" class="backend-status">● Checking backend…</span><span id="network" class="network online">● Online</span><a class="button secondary" href="/docs" target="_blank">API docs</a></div>
+  </header>
+  <main id="app"><div class="loading"><span></span> Loading traceable intelligence…</div></main>
+  <div id="toast" role="status"></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

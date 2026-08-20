@@ -1,0 +1,8 @@
+# Auto-generated from data/manifests/damage_detection_manifest.json (seed 20260820)
+path: C:/Users/hp/Documents/dorne_interceptor
+train: data/processed/infrastructure/concrete/damage_detection/train.txt
+val: data/processed/infrastructure/concrete/damage_detection/val.txt
+test: data/processed/infrastructure/concrete/damage_detection/test.txt
+names:
+  0: class_0_unverified
+  1: class_1_unverified

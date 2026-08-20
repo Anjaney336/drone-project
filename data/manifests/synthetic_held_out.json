@@ -1,0 +1,92 @@
+{
+  "schema_version": "aeris-data-manifest-v1",
+  "generator": "scripts/generate_synthetic_data.py",
+  "generator_version": "aeris-synthetic-v1",
+  "file": "data/processed/synthetic/held_out.npz",
+  "sha256": "97c3596c25e0f9f0278f6dd82ebfd713b09448a60fd9a143464f2f88e761d3c3",
+  "config": {
+    "seed": 20262,
+    "split": "held_out",
+    "duration_s": 3600.0,
+    "rate_hz": 50.0
+  },
+  "provenance": [
+    "synthetic",
+    "synthetic_fault"
+  ],
+  "parameters": {
+    "max_horizontal_speed_mps": {
+      "value": 16.0,
+      "origin": "DJI specification"
+    },
+    "max_vertical_speed_mps": {
+      "value": 5.0,
+      "origin": "DJI specification"
+    },
+    "accel_noise_density_ug_sqrt_hz": {
+      "value": 175.0,
+      "origin": "BMI088 specification"
+    },
+    "gyro_noise_density_dps_sqrt_hz": {
+      "value": 0.014,
+      "origin": "BMI088 specification"
+    },
+    "imu_bias_stationary_sigma_mps2": {
+      "value": 0.003,
+      "origin": "engineering_estimate"
+    },
+    "imu_bias_correlation_s": {
+      "value": 100.0,
+      "origin": "engineering_estimate"
+    },
+    "gnss_base_sigma_m": {
+      "value": 0.5,
+      "origin": "engineering_estimate anchored to DJI \u00b10.5 m GNSS hovering accuracy"
+    },
+    "hdop_range": {
+      "value": [
+        0.8,
+        2.5
+      ],
+      "origin": "engineering_estimate"
+    },
+    "vdop_ratio": {
+      "value": 1.5,
+      "origin": "engineering_estimate"
+    },
+    "urban_multipath_bias_m": {
+      "value": 6.0,
+      "origin": "engineering_estimate; distinct biased heavy-tail regime supported qualitatively by cited study"
+    },
+    "outage_duration_s": {
+      "value": [
+        1.0,
+        3.0
+      ],
+      "origin": "engineering_estimate"
+    },
+    "vision_precision": {
+      "value": 0.534,
+      "origin": "published YOLOv8-M VisDrone result"
+    },
+    "vision_recall": {
+      "value": 0.42,
+      "origin": "published YOLOv8-M VisDrone result"
+    },
+    "vision_range_midpoint_m": {
+      "value": 80.0,
+      "origin": "engineering_estimate"
+    }
+  },
+  "citations": {
+    "airframe": "https://www.dji.com/mini-4-pro/specs",
+    "imu": "https://www.bosch-sensortec.com/en/products/motion-sensors/imus/bmi088/",
+    "gnss_standard": "https://www.gps.gov/technical/ps/2020-SPS-performance-standard.pdf",
+    "urban_multipath": "https://doi.org/10.3390/s18041149",
+    "vision": "https://doi.org/10.3390/rs18091394",
+    "visdrone": "https://arxiv.org/abs/1804.07437"
+  },
+  "raw_imagery": false,
+  "tuning_allowed": false,
+  "reported_benchmark_allowed": true
+}

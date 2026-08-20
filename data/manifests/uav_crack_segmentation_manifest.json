@@ -1,0 +1,3792 @@
+{
+  "dataset": "uav_crack_segmentation_local",
+  "seed": 20260820,
+  "split_ratio": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "count": 315,
+  "records": [
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI0090.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI0090.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI0690.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI0690.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI1280.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI1280.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI1320.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI1320.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI1760.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI1760.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI1980.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI1980.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI2040.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI2040.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI2140.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI2140.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/DJI2180.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/DJI2180.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide101.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide101.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1014.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1014.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide102.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide102.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1028.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1028.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1029.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1029.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1041.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1041.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1042.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1042.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1048.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1048.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1053.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1053.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide106.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide106.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1061.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1061.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1062.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1062.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1066.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1066.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1067.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1067.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1077.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1077.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1085.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1085.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1089.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1089.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide109.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide109.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1090.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1090.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1096.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1096.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1101.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1101.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1102.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1102.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1114.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1114.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1121.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1121.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1122.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1122.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide113.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide113.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1134.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1134.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1138.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1138.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide114.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide114.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1144.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1144.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1145.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1145.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1148.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1148.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1149.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1149.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1158.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1158.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1159.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1159.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1168.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1168.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1172.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1172.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1199.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1199.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1211.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1211.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1217.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1217.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1218.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1218.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1219.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1219.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1230.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1230.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1234.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1234.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1240.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1240.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide126.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide126.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1267.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1267.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1277.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1277.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1278.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1278.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1289.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1289.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide129.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide129.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1290.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1290.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide131.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide131.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1313.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1313.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1319.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1319.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1328.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1328.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1342.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1342.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1361.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1361.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1362.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1362.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1363.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1363.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide137.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide137.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1374.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1374.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1375.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1375.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1384.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1384.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1385.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1385.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1386.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1386.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1387.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1387.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1396.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1396.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1397.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1397.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1398.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1398.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1399.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1399.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide140.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide140.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1410.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1410.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1411.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1411.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1420.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1420.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1423.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1423.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1433.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1433.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1434.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1434.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1435.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1435.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1444.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1444.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1445.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1445.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1446.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1446.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1447.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1447.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1456.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1456.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1457.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1457.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1459.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1459.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide148.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide148.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1481.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1481.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1483.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1483.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1492.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1492.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1496.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1496.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1497.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1497.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1498.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1498.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1508.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1508.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1520.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1520.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1529.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1529.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1536.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1536.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1537.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1537.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1542.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1542.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1545.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1545.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1546.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1546.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1548.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1548.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1552.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1552.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1553.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1553.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1557.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1557.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1560.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1560.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1561.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1561.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1566.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1566.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1568.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1568.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1573.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1573.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1574.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1574.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1575.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1575.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1577.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1577.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1581.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1581.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1582.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1582.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1583.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1583.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1586.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1586.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1589.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1589.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1590.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1590.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1592.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1592.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1593.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1593.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1594.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1594.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1596.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1596.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1597.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1597.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1598.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1598.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1602.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1602.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1605.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1605.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1606.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1606.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1610.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1610.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1612.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1612.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1614.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1614.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1615.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1615.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1616.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1616.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1617.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1617.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1619.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1619.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1625.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1625.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1628.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1628.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1629.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1629.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1631.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1631.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1637.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1637.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1638.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1638.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1639.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1639.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1641.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1641.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1642.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1642.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1654.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1654.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide1655.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide1655.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide167.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide167.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide174.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide174.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide175.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide175.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide179.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide179.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide184.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide184.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide185.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide185.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide189.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide189.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide276.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide276.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide277.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide277.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide281.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide281.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide282.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide282.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide293.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide293.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide294.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide294.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide30.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide30.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide306.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide306.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide307.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide307.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide310.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide310.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide316.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide316.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide319.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide319.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide330.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide330.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide340.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide340.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide364.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide364.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide369.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide369.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide378.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide378.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide379.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide379.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide381.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide381.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide389.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide389.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide392.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide392.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide393.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide393.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide418.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide418.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide440.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide440.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide462.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide462.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide463.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide463.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide465.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide465.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide466.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide466.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide477.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide477.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide479.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide479.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide490.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide490.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide491.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide491.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide497.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide497.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide498.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide498.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide499.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide499.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide508.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide508.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide509.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide509.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide521.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide521.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide522.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide522.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide545.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide545.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide556.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide556.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide557.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide557.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide558.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide558.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide569.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide569.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide570.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide570.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide571.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide571.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide577.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide577.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide578.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide578.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide579.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide579.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide581.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide581.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide582.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide582.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide583.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide583.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide588.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide588.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide589.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide589.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide590.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide590.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide591.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide591.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide592.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide592.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide593.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide593.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide594.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide594.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide595.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide595.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide600.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide600.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide601.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide601.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide604.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide604.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide605.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide605.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide606.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide606.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide607.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide607.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide614.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide614.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide619.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide619.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide655.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide655.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide670.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide670.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide672.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide672.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide673.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide673.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide676.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide676.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide677.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide677.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide680.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide680.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide686.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide686.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide690.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide690.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide694.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide694.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide698.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide698.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide702.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide702.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide706.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide706.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide708.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide708.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide712.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide712.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide716.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide716.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide74.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide74.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide742.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide742.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide750.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide750.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide756.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide756.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide77.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide77.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide772.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide772.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide773.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide773.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide777.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide777.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide778.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide778.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide779.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide779.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide78.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide78.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide785.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide785.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide786.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide786.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide794.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide794.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide797.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide797.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide806.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide806.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide81.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide81.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide813.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide813.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide814.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide814.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide815.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide815.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide821.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide821.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide822.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide822.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide830.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide830.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide833.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide833.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide835.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide835.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide837.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide837.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide838.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide838.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide839.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide839.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide841.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide841.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide845.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide845.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide849.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide849.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide850.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide850.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide854.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide854.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide858.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide858.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide862.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide862.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide865.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide865.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide869.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide869.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide873.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide873.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide874.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide874.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide881.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide881.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide885.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide885.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide886.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide886.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide89.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide89.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide898.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide898.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide899.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide899.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide90.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide90.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide911.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide911.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide918.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide918.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide919.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide919.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide92.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide92.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide920.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide920.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide921.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide921.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide922.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide922.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide923.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide923.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide929.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide929.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide93.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide93.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide930.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide930.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide934.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide934.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide938.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide938.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide942.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide942.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide946.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide946.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide954.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide954.png",
+      "split": "val",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide958.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide958.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide962.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide962.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide965.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide965.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide966.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide966.png",
+      "split": "test",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide978.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide978.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide982.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide982.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    },
+    {
+      "source_dataset": "uav_crack_segmentation_local",
+      "domain": "infrastructure",
+      "task_type": "semantic_segmentation_binary",
+      "file_path": "data/raw/concrete/uav_crack_segmentation/image/slide990.png",
+      "label_path": "data/raw/concrete/uav_crack_segmentation/masks/slide990.png",
+      "split": "train",
+      "provenance": {
+        "origin": "public_dataset_unverified_source",
+        "note": "DJI-filename UAV pavement/crack imagery with binary masks; upstream source and exact license not retained with the raw folder."
+      }
+    }
+  ]
+}

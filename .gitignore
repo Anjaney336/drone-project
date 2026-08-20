@@ -1,0 +1,46 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+build/
+dist/
+logs/
+artifacts/
+checkpoints/
+outputs/
+runs/
+tmp_outputs/
+.vscode/
+archive (1)/
+Blocks/
+VisDrone2019-DET-test-dev/
+VisDrone2019-DET-train/
+VisDrone2019-DET-val/
+data/raw/**
+!data/raw/.gitkeep
+!data/raw/**/
+!data/raw/**/README.md
+data/processed/**
+!data/processed/.gitkeep
+data/annotations/**
+!data/annotations/.gitkeep
+data/telemetry/**
+!data/telemetry/.gitkeep
+data/uploads/**
+!data/uploads/.gitkeep
+models/**/*.pt
+models/**/*.onnx
+dashboard/node_modules/
+.legacy_backup/
+# Quarantined: unlabeled light-field dataset, origin undetermined — see docs/dataset_audit.md.
+# Never tracked, never wired into any pipeline until a human confirms its provenance.
+Dataset/
+*.mp4
+*.tmp
+*.bak
+.ipynb_checkpoints/

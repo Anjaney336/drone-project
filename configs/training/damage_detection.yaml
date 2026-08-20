@@ -1,0 +1,27 @@
+experiment_name: damage_detection_yolov8n_baseline
+task_type: object_detection
+seed: 20260820
+data_config: configs/data/damage_detection.yaml
+model:
+  architecture: yolov8n
+  pretrained_weights: yolov8n.pt
+  input_size: 416
+training:
+  epochs: 15
+  batch_size: 8
+  optimizer: auto
+  device: cpu
+  early_stopping_patience: 5
+  augmentation:
+    train_only: true
+    hsv_h: 0.015
+    hsv_s: 0.5
+    hsv_v: 0.3
+    fliplr: 0.5
+    mosaic: 0.5
+output:
+  run_dir: artifacts/experiments/damage_detection_yolov8n_baseline
+notes: >
+  CPU-only baseline (no CUDA available in this environment). Epoch count and image
+  size kept modest deliberately for prototype turnaround time, not accuracy ceiling.
+  Class ids 0/1 are unverified anonymous categories (see docs/dataset_audit.md).

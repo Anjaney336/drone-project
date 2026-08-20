@@ -1,0 +1,27 @@
+project:
+  name: AERIS
+  claim: simulation-validated research prototype
+simulation:
+  primary_engine: deterministic_python
+  seed: 7
+  dt_s: 0.1
+  steps: 120
+fusion:
+  state: [x, y, z, vx, vy, vz]
+  process_acceleration_std_mps2: 0.5
+  nis_threshold_3d_99_percent: 11.345
+  update_policy: adaptive
+  trust_smoothing: 0.8
+  minimum_trust: 0.02
+  adaptive_noise_power: 2
+safety:
+  maximum_covariance_trace: 100.0
+  minimum_separation_m: 10.0
+  geofence_minimum_m: [-50.0, -50.0, 0.0]
+  geofence_maximum_m: [150.0, 100.0, 120.0]
+  risk_weights:
+    collision: 0.35
+    geofence: 0.20
+    uncertainty: 0.20
+    sensor_degradation: 0.15
+    communication: 0.10

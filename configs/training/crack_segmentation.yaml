@@ -1,0 +1,23 @@
+experiment_name: crack_segmentation_tinyunet_baseline
+task_type: semantic_segmentation_binary
+seed: 20260820
+data_config: data/manifests/uav_crack_segmentation_manifest.json
+model:
+  architecture: tiny_unet
+  base_channels: 16
+  input_size: 256
+training:
+  epochs: 30
+  batch_size: 4
+  learning_rate: 0.001
+  early_stopping_patience: 6
+  augmentation:
+    train_only: true
+    horizontal_flip: 0.5
+output:
+  run_dir: artifacts/experiments/crack_segmentation_tinyunet_baseline
+notes: >
+  CPU-only baseline. Only 220 training images (315 total, 70/15/15 split); a small
+  channel-width U-Net at 256px is used deliberately for CPU training time, not as
+  an accuracy ceiling. Treat metrics as a baseline reference point, not a
+  production-grade segmentation result.

@@ -1,0 +1,61 @@
+datasets:
+  - name: VisDrone2019-DET-candidate
+    source: https://github.com/VisDrone/VisDrone-Dataset
+    license: verify canonical VisDrone terms before redistribution
+    modality: RGB images and object-detection annotations/converted labels
+    purpose: aerial-view small-object perception engineering only
+    number_of_samples: 0 validated local files
+    labels: pedestrian, people, bicycle, car, van, truck, tricycle, awning-tricycle, bus, motor, others
+    preprocessing: none; dataset is not present or wired into the active pipeline
+    split: unavailable
+    origin: public_benchmark
+    real_or_synthetic: real imagery; annotations are public benchmark labels
+    known_limitations: not present locally; not drone-navigation telemetry; upstream license and canonical counts must be verified
+  - name: aeris-simulation-v2
+    source: aeris.simulation.scenarios
+    license: repository license
+    modality: kinematic truth and GNSS-like position measurements
+    purpose: controlled state-estimation and trajectory validation
+    number_of_samples: generated per configuration
+    labels: scenario_id
+    preprocessing: none
+    split: seeded scenario matrix; no train/validation/test claim
+    origin: simulation
+    real_or_synthetic: synthetic simulation
+    known_limitations: simplified dynamics and observation models; no calibrated vehicle or environment model
+  - name: aeris-fault-injection-v2
+    source: aeris.simulation.fault_injection
+    license: repository license
+    modality: perturbed navigation and timing measurements
+    purpose: controlled resilience and anomaly-detection evaluation
+    number_of_samples: generated per configuration
+    labels: gnss_drift, gnss_dropout, imu_bias, camera_degradation, camera_occlusion, packet_loss, communication_latency, sensor_disagreement, combined_degradation
+    preprocessing: faults have explicit severity, start time, duration, affected sensor, and recovery phase
+    split: scenario controlled
+    origin: synthetic_fault
+    real_or_synthetic: synthetic fault injection
+    known_limitations: not a real-world attack or fault measurement dataset
+  - name: Anti-UAV300-candidate
+    source: https://github.com/ZhaoJ9014/Anti-UAV
+    license: verify dataset terms before use or redistribution; repository code is MIT
+    modality: RGB and thermal UAV video, boxes, visibility flags
+    purpose: dedicated drone detection and tracking evaluation
+    number_of_samples: unavailable until complete archive validation
+    labels: UAV bounding box and target visibility
+    preprocessing: none performed
+    split: official release split, pending local verification
+    origin: public_benchmark
+    real_or_synthetic: real imagery
+    known_limitations: 5.6 GB browser download incomplete on 2026-08-20; excluded from metrics
+  - name: EuRoC-MAV-candidate
+    source: https://doi.org/10.3929/ethz-b-000690084
+    license: In Copyright - Non-Commercial Use Permitted; verify before use
+    modality: stereo camera, IMU, calibration, Vicon/Leica ground truth
+    purpose: recorded visual-inertial ingestion and estimator replay
+    number_of_samples: unavailable until complete archive validation
+    labels: timestamped sensor values and reference pose
+    preprocessing: EurocImuAdapter implemented; no benchmark run
+    split: official sequences
+    origin: public_benchmark
+    real_or_synthetic: real flight/rig measurements
+    known_limitations: not a drone-target dataset; complete local archive not yet validated
