@@ -68,6 +68,11 @@ they appear.
 
 ## Run in three commands
 
+**Python 3.10, 3.11 or 3.12 is required.** The pinned `torch==2.5.1` publishes no wheels
+for 3.13 or newer, so a newer interpreter fails at install time. Check with
+`python --version`; if it is 3.13+, install 3.12 and create the virtualenv with
+`py -3.12 -m venv .venv`.
+
 ```powershell
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.lock

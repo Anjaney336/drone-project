@@ -163,6 +163,14 @@ function reviewTrail(reviews){
   if(!reviews||!reviews.length)return '';
   return `<div class="subtle">${reviews.map(r=>`${esc(r.verdict)} · ${esc(r.reviewer)} · ${esc(r.timestamp)}`).join('<br>')}</div>`;
 }
+// The recommended action comes from mission reliability, which is constant across a
+// mission — so it was identical in all five rows, and rendering it per-row implied five
+// independent assessments while squeezing the column to ~170px. Stated once instead.
+function aiGuidance(findings){
+  const f=(findings||[]).find(x=>x.recommended_action);
+  if(!f)return '';
+  return `<div class="notice"><b>What this means:</b> ${esc(f.recommended_action)}<br><span class="subtle">Derived from this mission's reliability assessment, so it applies to every finding below. Per-finding confidence is in the table.</span></div>`;
+}
 function mediaUrl(path){return `${API}/media?path=${encodeURIComponent(path)}`}
 function verdictBadge(v){if(!v)return '';const cls=v==='CONFIRMED'?'CRITICAL':v==='REJECTED'?'LOW':v==='ESCALATED'?'HIGH':'MEDIUM';return `<span class="priority ${cls}">${esc(v.replaceAll('_',' '))}</span>`}
 async function missionDetailPage(id){
@@ -170,6 +178,11 @@ async function missionDetailPage(id){
   const m=await request(`${API}/missions/${id}`);
   const r=m.reliability||{};
   const byMedia={};
+  // One shared numbering for the whole report: box #3 on the image is row #3 in the
+  // table. Without it a reviewer sees five red rectangles and five table rows with no
+  // way to tell which is which.
+  const findingNo=new Map();
+  (m.ai_findings||[]).forEach((f,i)=>findingNo.set(f.finding_id,i+1));
   (m.ai_findings||[]).forEach(f=>{if(f.source_media){(byMedia[f.source_media]=byMedia[f.source_media]||[]).push(f)}});
   const storySteps=['DRONE','MISSION','DATA','HEALTH','RELIABILITY','AI ANALYSIS','HUMAN REVIEW','ACTION'];
   const reachedFindings=(m.ai_findings||[]).length>0, reachedReview=(m.ai_findings||[]).some(f=>f.review_status!=='PENDING');
@@ -193,8 +206,8 @@ async function missionDetailPage(id){
   ${card('Mission',`<div class="metric-grid" style="grid-template-columns:1fr 1fr 1fr">${metric('Mission ID',m.mission_id,'')}${metric('Domain',m.domain||'infrastructure','')}${metric('District',m.district,'')}${metric('Status',m.status,'')}${metric('Drone',m.drone?m.drone.name:'Not assigned',m.drone_id||'')}${metric('Assets',m.asset_ids.join(', ')||'—','')}</div><p class="subtle">${tag(m.origin)} · created ${esc(m.timestamp)} · ${esc(m.name)}</p>`,12)}
   ${card('Mission reliability',`${reliabilityTag(r)}<div class="evidence-list">${(r.reasons||['No telemetry has been ingested for this mission yet.']).map(x=>`<div class="evidence">${esc(x)}</div>`).join('')}</div>${reliabilityBars(r)}`,6)}
   ${card('Drone health (telemetry-derived)',m.telemetry.length?`<p class="subtle">${m.telemetry.length} telemetry record(s) ingested for this mission. Only fields actually reported are shown; nothing here is fabricated.</p><div class="table-wrap"><table><thead><tr><th>t</th><th>GNSS</th><th>Camera</th><th>Battery</th><th>Packet loss</th></tr></thead><tbody>${m.telemetry.map(t=>`<tr><td>${t.ts}</td><td>${t.gnss_quality??'—'}</td><td>${t.camera_confidence??'—'}</td><td>${t.battery_percent??'—'}</td><td>${t.packet_loss?'yes':'no'}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty">No telemetry ingested for this mission yet.</div>`,6)}
-  ${card('Mission media',`<form id="upload-form" class="form-grid" style="margin-bottom:16px"><label class="full">Upload inspection image (JPEG/PNG, max 15MB)<input type="file" name="image" accept="image/jpeg,image/png" required></label><div class="full"><button class="button" type="submit">Upload & run AI analysis</button></div></form>${Object.keys(byMedia).length?Object.keys(byMedia).map(src=>`<div class="media-item"><img class="media-thumb" src="${mediaUrl(src)}" data-boxes='${esc(JSON.stringify(byMedia[src].filter(f=>f.regions).flatMap(f=>f.regions.map(reg=>({...reg,label:f.label,confidence:f.confidence})))))}' data-draw-boxes="1"><span class="subtle">${esc(src.split(/[\\/]/).pop())}</span></div>`).join(''):`<div class="empty">No imagery analyzed for this mission yet.</div>`}`,7)}
-  ${card('AI analysis',(m.ai_findings||[]).length?`<div class="table-wrap"><table><thead><tr><th>Finding</th><th>Model</th><th>Confidence</th><th>Interpretation</th><th>Review</th></tr></thead><tbody>${m.ai_findings.map(f=>`<tr><td><b>${esc(f.label)}</b>${f.asset_id?`<br><span class="subtle">${esc(f.asset_id)}</span>`:''}<br><span class="subtle">${esc(f.timestamp)}</span></td><td>${esc(f.model_name)}<br><span class="subtle">${esc(f.model_version)}</span></td><td>${Math.round(f.confidence*100)}%</td><td><p class="subtle">${esc(f.interpretation||'')}</p><p class="subtle"><b>${esc(f.recommended_action||'')}</b></p></td><td>${f.review_status==='PENDING'?`<select class="review-verdict" data-id="${f.finding_id}"><option value="">Choose…</option><option value="CONFIRMED">Confirmed</option><option value="REJECTED">Rejected</option><option value="NEEDS_REINSPECTION">Needs reinspection</option><option value="ESCALATED">Escalated</option></select>`:verdictBadge(f.review_status)}${reviewTrail(f.reviews)}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty">No AI findings for this mission yet. Upload an image above to run real analysis.</div>`,5)}
+  ${card('Mission media',`<form id="upload-form" class="form-grid" style="margin-bottom:16px"><label class="full">Upload inspection image (JPEG/PNG, max 15MB)<input type="file" name="image" accept="image/jpeg,image/png" required></label><div class="full"><button class="button" type="submit">Upload & run AI analysis</button></div></form>${Object.keys(byMedia).length?Object.keys(byMedia).map(src=>`<div class="media-item"><img class="media-thumb" src="${mediaUrl(src)}" data-boxes='${esc(JSON.stringify(byMedia[src].filter(f=>f.regions).flatMap(f=>f.regions.map(reg=>({...reg,label:f.label,confidence:f.confidence,n:findingNo.get(f.finding_id)})))))}' data-draw-boxes="1"><span class="subtle">${esc(src.split(/[\\/]/).pop())}</span></div>`).join(''):`<div class="empty">No imagery analyzed for this mission yet.</div>`}`,4)}
+  ${card('AI analysis',(m.ai_findings||[]).length?`${aiGuidance(m.ai_findings)}<div class="table-wrap"><table class="ai-table"><thead><tr><th>#</th><th>Finding</th><th>Model</th><th>Confidence</th><th>Review</th></tr></thead><tbody>${m.ai_findings.map(f=>`<tr><td><span class="finding-num">${findingNo.get(f.finding_id)}</span></td><td><b>${esc(f.label)}</b>${f.asset_id?`<br><span class="subtle">${esc(f.asset_id)}</span>`:''}<br><span class="subtle">${esc(f.timestamp)}</span></td><td>${esc(f.model_name)}<br><span class="subtle">${esc(f.model_version)}</span></td><td>${Math.round(f.confidence*100)}%</td><td>${f.review_status==='PENDING'?`<select class="review-verdict" data-id="${f.finding_id}"><option value="">Choose…</option><option value="CONFIRMED">Confirmed</option><option value="REJECTED">Rejected</option><option value="NEEDS_REINSPECTION">Needs reinspection</option><option value="ESCALATED">Escalated</option></select>`:verdictBadge(f.review_status)}${reviewTrail(f.reviews)}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty">No AI findings for this mission yet. Upload an image above to run real analysis.</div>`,8)}
   </div>
   <p class="subtle">Every field above traces to <code>GET /api/v1/missions/${esc(id)}</code>. AI findings are never presented as confirmed defects — only a human reviewer's verdict changes that status.</p>`;
   document.querySelectorAll('.review-verdict').forEach(sel=>sel.onchange=async()=>{if(!sel.value)return;try{if(await submitVerdict(sel.dataset.id,sel.value))missionDetailPage(id);else sel.value=""}catch(e){toast(e.message);sel.value=""}});
@@ -218,7 +231,7 @@ async function missionDetailPage(id){
 }
 window.drawBoxes=function(img){
   try{const boxes=JSON.parse(img.dataset.boxes||'[]');const wrap=img.parentElement;wrap.querySelectorAll('.bbox').forEach(b=>b.remove());const nw=img.naturalWidth,nh=img.naturalHeight;if(!nw||!nh)return;
-  boxes.forEach(b=>{if(b.type!=='bbox'||!b.xyxy)return;const[x1,y1,x2,y2]=b.xyxy;const el=document.createElement('div');el.className='bbox';el.style.left=`${100*x1/nw}%`;el.style.top=`${100*y1/nh}%`;el.style.width=`${100*(x2-x1)/nw}%`;el.style.height=`${100*(y2-y1)/nh}%`;el.title=`${b.label} · ${Math.round(b.confidence*100)}%`;wrap.appendChild(el)})
+  boxes.forEach(b=>{if(b.type!=='bbox'||!b.xyxy)return;const[x1,y1,x2,y2]=b.xyxy;const el=document.createElement('div');el.className='bbox';el.style.left=`${100*x1/nw}%`;el.style.top=`${100*y1/nh}%`;el.style.width=`${100*(x2-x1)/nw}%`;el.style.height=`${100*(y2-y1)/nh}%`;el.title=`#${b.n} ${b.label} · ${Math.round(b.confidence*100)}%`;if(b.n){const tag=document.createElement('span');tag.className='bbox-num';tag.textContent=b.n;el.appendChild(tag)}wrap.appendChild(el)})
   }catch(e){}
 };
 // Inline onclick handlers used to interpolate record ids straight into a JS string

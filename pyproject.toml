@@ -7,7 +7,11 @@ name = "aeris-drone-safety"
 version = "0.2.0"
 description = "AI-assisted drone infrastructure inspection and priority intelligence platform."
 readme = "README.md"
-requires-python = ">=3.10"
+# Upper bound is real, not cautious: torch 2.5.1 (pinned below and in
+# requirements.lock) publishes no wheels above CPython 3.12. Without this bound pip
+# happily starts installing on 3.13/3.14 and only fails much later with an opaque
+# "No matching distribution found for torch==2.5.1+cpu".
+requires-python = ">=3.10,<3.13"
 authors = [{ name = "AERIS Team" }]
 license = { text = "MIT" }
 dependencies = [
