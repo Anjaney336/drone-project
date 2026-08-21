@@ -12,6 +12,10 @@ class PriorityResult:
     formula: str
 
 
+# Four or more repeat sightings saturate the recurrence term; beyond that, "seen again"
+# stops adding information for triage purposes.
+RECURRENCE_SATURATION = 4.0
+
 WEIGHTS = {
     "severity": 0.30,
     "confidence": 0.15,
@@ -31,16 +35,28 @@ def assess_priority(
     trend: float,
     geographic_impact: float,
 ) -> PriorityResult:
-    """Transparent prototype score; confidence=None is conservative, never fabricated."""
+    """Transparent prototype score.
+
+    Unlike mission reliability, priority must always produce a number — it exists to
+    rank a queue, and an unrankable item is useless to an authority. So an unknown
+    confidence is handled by *dropping the confidence term and renormalising the
+    remaining weights*, exactly as the reliability engine does, rather than by
+    substituting a neutral 0.5. Inventing an input would let a value nobody measured
+    move an asset up or down the queue.
+    """
     bounded = {
         "severity": min(max(severity, 0.0), 1.0),
-        "confidence": 0.5 if confidence is None else min(max(confidence, 0.0), 1.0),
         "criticality": min(max(criticality, 0.0), 1.0),
-        "recurrence": min(max(recurrence / 4.0, 0.0), 1.0),
+        "recurrence": min(max(recurrence / RECURRENCE_SATURATION, 0.0), 1.0),
         "trend": min(max(trend, 0.0), 1.0),
         "geographic_impact": min(max(geographic_impact, 0.0), 1.0),
     }
-    score = round(100 * sum(bounded[key] * weight for key, weight in WEIGHTS.items()), 1)
+    if confidence is not None:
+        bounded["confidence"] = min(max(confidence, 0.0), 1.0)
+    applicable = {key: weight for key, weight in WEIGHTS.items() if key in bounded}
+    total_weight = sum(applicable.values())
+    weights_used = {key: weight / total_weight for key, weight in applicable.items()}
+    score = round(100 * sum(bounded[key] * weight for key, weight in weights_used.items()), 1)
     level = (
         "CRITICAL" if score >= 80 else "HIGH" if score >= 65 else "MEDIUM" if score >= 40 else "LOW"
     )
@@ -56,7 +72,10 @@ def assess_priority(
     if bounded["geographic_impact"] >= 0.6:
         factors.append("Located in a concentrated problem area")
     if confidence is None:
-        factors.append("Observation confidence unavailable; neutral value used for triage")
+        factors.append(
+            "Observation confidence NOT AVAILABLE; excluded from the score and the "
+            "remaining weights renormalised"
+        )
     if not factors:
         factors.append("Routine monitoring priority based on current evidence")
     return PriorityResult(
@@ -64,5 +83,5 @@ def assess_priority(
         level=level,
         factors=factors,
         components={key: round(value, 3) for key, value in bounded.items()},
-        formula=" + ".join(f"{weight:.2f}×{key}" for key, weight in WEIGHTS.items()),
+        formula=" + ".join(f"{weight:.2f}×{key}" for key, weight in sorted(weights_used.items())),
     )

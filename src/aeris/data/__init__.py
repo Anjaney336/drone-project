@@ -5,7 +5,6 @@ from aeris.data.ingestion import (
     LiveHardwareAdapter,
 )
 from aeris.data.telemetry import TelemetryRecord
-from aeris.data.visdrone import VisDroneInventory, inspect_visdrone
 
 __all__ = [
     "CsvTelemetryAdapter",
@@ -13,6 +12,4 @@ __all__ = [
     "IngestionMode",
     "LiveHardwareAdapter",
     "TelemetryRecord",
-    "VisDroneInventory",
-    "inspect_visdrone",
 ]

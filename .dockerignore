@@ -6,13 +6,22 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
-data/
-artifacts/
-runs/
-.legacy_backup/
-Dataset/
-*.pt
+node_modules/
 .env
 .env.*
-node_modules/
-tests/
+.legacy_backup/
+Dataset/
+
+# Raw training corpora and regenerable run output never belong in the image.
+data/raw/
+data/processed/
+data/annotations/
+data/telemetry/
+data/uploads/
+artifacts/
+runs/
+
+# data/demo and data/manifests ARE copied: the seeded dataset and provenance manifests
+# are part of what the running service serves. models/ is copied too — it carries the
+# published checkpoints, without which every model reports NOT_TRAINED. Neither can be
+# excluded by a blanket data/ or *.pt rule.

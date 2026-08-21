@@ -6,9 +6,11 @@ reports one of four honest states per model and only runs inference when READY. 
 adapter fabricates a prediction: if a checkpoint isn't there, analyze() raises rather
 than returning a made-up finding.
 """
+
 from __future__ import annotations
 
 import json
+import threading
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
@@ -17,6 +19,23 @@ from typing import Any
 from aeris.app.product_models import Domain, ModelStatus
 
 ROOT = Path(__file__).resolve().parents[3]
+
+# Two locations hold a checkpoint, and the distinction is deliberate:
+#   models/<experiment>/          published, version-controlled, ships with a clone
+#   artifacts/experiments/<name>/ raw output of a local training run (gitignored)
+# A published checkpoint wins so that cloning the repository is enough to get a
+# working model, while a developer who retrains locally still picks up their own
+# run without having to publish it first.
+MODELS_ROOT = ROOT / "models"
+TRAINING_RUNS_ROOT = ROOT / "artifacts" / "experiments"
+
+
+def resolve_run_dir(experiment_name: str) -> Path:
+    """Published checkpoint if one is committed, else the local training run."""
+    published = MODELS_ROOT / experiment_name
+    if (published / "status.json").exists():
+        return published
+    return TRAINING_RUNS_ROOT / experiment_name
 
 
 @dataclass(frozen=True)
@@ -35,7 +54,15 @@ class ModelAdapter(ABC):
     task_type: str
     model_name: str
     model_version: str
-    run_dir: Path
+    experiment_name: str
+
+    def __init__(self) -> None:
+        self.run_dir: Path = resolve_run_dir(self.experiment_name)
+        self._model = None
+        # REGISTRY holds one adapter per model and FastAPI serves sync endpoints from a
+        # threadpool, so two concurrent /analyze calls can enter _load() at once and
+        # each build its own copy of the checkpoint.
+        self._load_lock = threading.Lock()
 
     def status(self) -> ModelStatus:
         status_file = self.run_dir / "status.json"
@@ -58,7 +85,9 @@ class ModelAdapter(ABC):
             "status": self.status(),
         }
         if status_file.exists():
-            base.update({k: v for k, v in json.loads(status_file.read_text()).items() if k != "status"})
+            base.update(
+                {k: v for k, v in json.loads(status_file.read_text()).items() if k != "status"}
+            )
         return base
 
     @abstractmethod
@@ -70,7 +99,8 @@ class ModelAdapter(ABC):
         status = self.status()
         if status != ModelStatus.READY:
             raise RuntimeError(
-                f"{self.model_name} is {status.value}, not READY; refusing to fabricate a prediction."
+                f"{self.model_name} is {status.value}, not READY; "
+                "refusing to fabricate a prediction."
             )
 
 
@@ -79,16 +109,16 @@ class InfrastructureDetectionModel(ModelAdapter):
     task_type = "object_detection"
     model_name = "damage_detection_yolov8n_baseline"
     model_version = "baseline-1"
-    run_dir = ROOT / "artifacts" / "experiments" / "damage_detection_yolov8n_baseline"
-
-    _model = None
+    experiment_name = "damage_detection_yolov8n_baseline"
 
     def _load(self):
         if self._model is None:
-            from ultralytics import YOLO
+            with self._load_lock:
+                if self._model is None:
+                    from ultralytics import YOLO
 
-            checkpoint = self.run_dir / "weights" / "best.pt"
-            self._model = YOLO(str(checkpoint))
+                    checkpoint = self.run_dir / "weights" / "best.pt"
+                    self._model = YOLO(str(checkpoint))
         return self._model
 
     def analyze(self, image_path: str) -> list[ModelPrediction]:
@@ -109,7 +139,8 @@ class InfrastructureDetectionModel(ModelAdapter):
                     ModelPrediction(
                         domain=self.domain,
                         task_type=self.task_type,
-                        label=f"AI Flagged: Possible Defect ({names.get(cls_id, f'class_{cls_id}')})",
+                        label="AI Flagged: Possible Defect "
+                        f"({names.get(cls_id, f'class_{cls_id}')})",
                         confidence=round(conf, 4),
                         model_name=self.model_name,
                         model_version=self.model_version,
@@ -124,20 +155,22 @@ class CrackSegmentationModel(ModelAdapter):
     task_type = "semantic_segmentation_binary"
     model_name = "crack_segmentation_tinyunet_baseline"
     model_version = "baseline-1"
-    run_dir = ROOT / "artifacts" / "experiments" / "crack_segmentation_tinyunet_baseline"
-
-    _model = None
+    experiment_name = "crack_segmentation_tinyunet_baseline"
 
     def _load(self):
         if self._model is None:
-            import torch
+            with self._load_lock:
+                if self._model is None:
+                    import torch
 
-            from aeris.training.segmentation import TinyUNet
+                    from aeris.training.segmentation import TinyUNet
 
-            model = TinyUNet(base=16)
-            model.load_state_dict(torch.load(self.run_dir / "best_model.pt", map_location="cpu"))
-            model.eval()
-            self._model = model
+                    model = TinyUNet(base=16)
+                    model.load_state_dict(
+                        torch.load(self.run_dir / "best_model.pt", map_location="cpu")
+                    )
+                    model.eval()
+                    self._model = model
         return self._model
 
     def analyze(self, image_path: str) -> list[ModelPrediction]:
@@ -148,7 +181,11 @@ class CrackSegmentationModel(ModelAdapter):
 
         model = self._load()
         img = Image.open(image_path).convert("RGB").resize((256, 256))
-        tensor = torch.from_numpy(np.asarray(img, dtype=np.float32) / 255.0).permute(2, 0, 1).unsqueeze(0)
+        tensor = (
+            torch.from_numpy(np.asarray(img, dtype=np.float32) / 255.0)
+            .permute(2, 0, 1)
+            .unsqueeze(0)
+        )
         with torch.no_grad():
             logits = model(tensor)
             probs = torch.sigmoid(logits)[0, 0]
@@ -165,7 +202,9 @@ class CrackSegmentationModel(ModelAdapter):
                 confidence=round(mean_confidence, 4),
                 model_name=self.model_name,
                 model_version=self.model_version,
-                regions=[{"type": "mask_summary", "affected_area_fraction": round(affected_fraction, 4)}],
+                regions=[
+                    {"type": "mask_summary", "affected_area_fraction": round(affected_fraction, 4)}
+                ],
             )
         ]
 
@@ -175,7 +214,7 @@ class AgricultureModel(ModelAdapter):
     task_type = "image_classification"
     model_name = "agriculture_mobilenetv3_baseline"
     model_version = "unbuilt"
-    run_dir = ROOT / "artifacts" / "experiments" / "agriculture_mobilenetv3_baseline"
+    experiment_name = "agriculture_mobilenetv3_baseline"
 
     def analyze(self, image_path: str) -> list[ModelPrediction]:
         self._require_ready()

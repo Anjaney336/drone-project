@@ -19,7 +19,7 @@ Reasons:
 • High asset criticality
 • Condition deterioration increased
 • Located in a concentrated problem area
-• Observation confidence unavailable; neutral value used for triage
+• Observation confidence NOT AVAILABLE; excluded from the score and the remaining weights renormalised
 ```
 
 Every priority-queue row carries this explanation — confirmed rendering correctly in-browser on
@@ -47,8 +47,7 @@ concentration. It does **not** currently read `mission_reliability` or AI-findin
 directly into its formula — those are surfaced adjacently (in the review queue and Mission Detail
 page) rather than folded into the same number, which keeps "how urgent" and "how trustworthy"
 separately inspectable rather than collapsed into one opaque score. This is a deliberate design
-choice carried over unchanged from the prior session's architecture (see
-`docs/application_migration_plan.md`), not a gap introduced this pass.
+choice carried over unchanged from the prior session's architecture not a gap introduced this pass.
 
 ## Limitation
 

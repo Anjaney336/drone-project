@@ -5,38 +5,59 @@
 | Dataset | Origin | Local samples | Modality | Intended use |
 |---|---:|---:|---|---|
 | AERIS demonstration dataset | demonstration | 10 assets, 4 missions, 7 seeded observations | product entities | reproducible SIH workflow only |
-| VisDrone 2019 DET | public benchmark candidate | 0 validated local files | RGB image + detection annotation | future small-object perception evaluation only |
+| `damage_detection_local` | public dataset, unverified source | 1,500 images (70/15/15, seed 20260820) | RGB image + YOLO boxes | **trains the shipped YOLOv8n detector** |
+| `uav_crack_segmentation_local` | public dataset, unverified source | 315 images (70/15/15, seed 20260820) | RGB image + binary mask | **trains the shipped TinyUNet segmenter** |
 | AERIS synthetic sensor v1 | synthetic / synthetic fault | generated per split | truth, IMU, GNSS-like, detector outputs | statistical supporting-data validation |
 | AERIS seeded scenarios | simulation | generated per run | position/velocity/GNSS-like measurements | estimation baselines |
 | AERIS fault injection | synthetic fault | generated per run | drift, dropout, noise, timing, loss, bias, degradation, disagreement | resilience tests only |
 | Real flight telemetry | measured | 0 | camera/GNSS/IMU/barometer/telemetry | not yet available |
-| Anti-UAV300 | public benchmark candidate | download initiated; not validated locally | RGB/thermal UAV video + boxes/visibility | dedicated UAV detection/tracking |
-| EuRoC MAV | public benchmark candidate | not validated locally | stereo, IMU, pose ground truth | visual-inertial ingestion and timing |
 
-The machine-readable manifest is `data/manifests/datasets.yaml`. VisDrone is not present in the
-active workspace and is not evidence for GNSS, IMU, telemetry, navigation anomalies, or current
-detector performance. Users must verify upstream terms before any future download/redistribution.
+The two `_local` datasets above are what the shipped models were actually trained on; their
+manifests are `data/manifests/damage_detection_manifest.json` and
+`data/manifests/uav_crack_segmentation_manifest.json`. The machine-readable inventory is
+`data/manifests/datasets.yaml`.
 
-## Relevance decision
+## Datasets considered and not used
 
-VisDrone is relevant only for aerial-view small-object perception engineering. Its canonical classes are ground objects; it is **not** a dedicated airborne-drone detection dataset and cannot validate AERIS navigation resilience. Anti-UAV300 is the appropriate complementary perception benchmark because its official release contains RGB and thermal UAV sequences with dense boxes and visibility flags. EuRoC MAV is appropriate for visual-inertial adapter validation because it provides stereo at 20 FPS, IMU at 200 Hz, calibration, and external ground truth. Neither dataset alone validates the full AERIS safety claim.
+Three public benchmarks were evaluated during an earlier, drone-detection-oriented phase of
+this project and are **not** part of the inspection product. They are recorded here so the
+decision is auditable, not as roadmap items:
 
-The Anti-UAV300 browser transfer was initiated from the official Google Drive release on 2026-08-20. The 5.6 GB archive was not complete at audit time and is therefore excluded from all reported metrics. A partial browser download is not treated as a dataset. EuRoC's official archive is also multi-gigabyte and remains excluded until a complete archive, license review, checksum, and ingestion QA are recorded.
+| Dataset | Why it was dropped |
+|---|---|
+| VisDrone 2019 DET | Aerial detection of ground objects (pedestrians, vehicles). Not infrastructure defects, and never present in the workspace or wired into any pipeline. |
+| Anti-UAV300 | Detecting drones *in the sky*. That is a counter-UAV task, not an inspection task. The 5.6 GB archive never completed download and was excluded from every reported metric. |
+| EuRoC MAV | Stereo + IMU with ground-truth pose, useful only for visual-inertial estimator replay. No local archive was ever validated. |
 
-Official references: Anti-UAV repository: https://github.com/ZhaoJ9014/Anti-UAV ; EuRoC MAV: https://ethz-asl.github.io/datasets/euroc-mav/ and DOI https://doi.org/10.3929/ethz-b-000690084 .
+No metric anywhere in this repository is derived from any of them. `aeris.data.synthetic`
+cites a published VisDrone YOLOv8-M result as the *provenance of a noise parameter*; that is a
+citation, not a dependency on the dataset.
 
-Unknown values in the telemetry schema are nullable. Origin, source, scenario ID, and injected-fault label accompany every simulation row.
+Unknown values in the telemetry schema are nullable. Origin, source, scenario ID, and
+injected-fault label accompany every simulation row.
 
 ## Product demonstration dataset
 
 `data/demo/aeris_demo_seed_2026.json` is the authoritative product seed. Generate it with
 `scripts/export_demo_dataset.py`. Its fixed source is `aeris.demo.seed.v1`, seed is 2026, and
 generation timestamp is fixed so byte output is reproducible. SHA-256 for this revision is
-`db0e2e7d6d23115cae030560d9660ae67ed98503f01f1d479ca11795e0c7503f`.
+`c59909c02bc94df33244c783b54c809c7918aa97e699eee2ea3fab74ac201c65`.
+
+Reproducibility is enforced, not just asserted. `scripts/export_demo_dataset.py --check`
+regenerates the dataset and fails if the committed file differs; CI runs it on every push.
+Three things make the hash stable:
+
+- the export runs against a throwaway database, so nothing the app or the test suite wrote
+  into `artifacts/aeris_product.db` can leak into it;
+- the file is written as bytes with explicit LF newlines, so it does not change when
+  generated on Windows;
+- `.gitattributes` marks `data/**` as binary for end-of-line purposes, so `text=auto`
+  cannot rewrite the newlines on checkout and invalidate the hash.
 
 The locations are intentionally demonstration records for the prototype. Evidence URIs are
 labelled demonstration references, not downloadable photographs. Observation confidence is null
-because no trained/evaluated infrastructure model is present.
+on the seeded observations because they were authored as demonstration records, not produced by
+a model — a real AI finding always carries the confidence its model reported.
 
 ## Limitations
 
@@ -45,4 +66,7 @@ because no trained/evaluated infrastructure model is present.
 - no hardware time synchronization or calibration record;
 - no validated RGB/thermal pairing;
 - no real anomaly or adversarial-attack measurements;
-- no evidence that public perception benchmarks represent a particular Indian deployment site.
+- no evidence that the training imagery represents a particular Indian deployment site;
+- **the upstream source and licence of both training datasets were not retained** when the raw
+  folders were downloaded, and the detector's class ids 0/1 remain anonymous — findings are
+  surfaced as `class_0_unverified` / `class_1_unverified` rather than as named defect types.

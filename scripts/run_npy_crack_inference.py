@@ -89,9 +89,7 @@ def main() -> None:
             probabilities = torch.sigmoid(model(tensor))[:, 0]
             masks = probabilities > args.threshold
 
-            for path, probability, mask in zip(
-                batch_files, probabilities, masks, strict=True
-            ):
+            for path, probability, mask in zip(batch_files, probabilities, masks, strict=True):
                 affected_fraction = float(mask.float().mean().item())
                 mean_signal_probability = (
                     float(probability[mask].mean().item()) if mask.any() else None

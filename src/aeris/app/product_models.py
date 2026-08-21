@@ -88,8 +88,14 @@ class TelemetryIngest(BaseModel):
     @field_validator("origin")
     @classmethod
     def telemetry_origin_must_be_declared(cls, value: DataOrigin) -> DataOrigin:
+        # USER_UPLOADED belongs here: a telemetry file a user attaches to a mission is
+        # not the same evidence class as a measurement taken by an instrumented field
+        # deployment, and must not have to masquerade as FIELD to be ingestible.
+        # DEMONSTRATION and PUBLIC_BENCHMARK stay excluded — seeded and benchmark data
+        # never enter a mission's telemetry stream.
         if value not in {
             DataOrigin.FIELD,
+            DataOrigin.USER_UPLOADED,
             DataOrigin.MEASURED,
             DataOrigin.SIMULATION,
             DataOrigin.SYNTHETIC_FAULT,

@@ -4,7 +4,7 @@ Model: `TinyUNet` (base width 16), trained on the 220-image train split of the U
 segmentation dataset, seed `20260820`. Training completed in the background without
 interruption — 825.2s elapsed, early stopping did not trigger (best val loss recorded at the
 final epoch), checkpoint at
-[`artifacts/experiments/crack_segmentation_tinyunet_baseline/best_model.pt`](../artifacts/experiments/crack_segmentation_tinyunet_baseline/best_model.pt).
+`models/crack_segmentation_tinyunet_baseline/best_model.pt` once published (raw run: `artifacts/experiments/crack_segmentation_tinyunet_baseline/best_model.pt`).
 Evaluation script: [`scripts/evaluate_crack_segmentation.py`](../scripts/evaluate_crack_segmentation.py)
 — loads the saved checkpoint, does not retrain.
 
@@ -19,7 +19,7 @@ Evaluation script: [`scripts/evaluate_crack_segmentation.py`](../scripts/evaluat
 | Best single-image IoU | 0.908 (`slide814.png`) |
 | Worst single-image IoU | 0.0 (`slide1542.png`, `slide965.png` — total misses) |
 
-Full per-image breakdown: [`artifacts/experiments/crack_segmentation_results/per_image_metrics.csv`](../artifacts/experiments/crack_segmentation_results/per_image_metrics.csv)
+Full per-image breakdown: `artifacts/experiments/crack_segmentation_results/per_image_metrics.csv` (regenerated, not committed)
 (48 rows, one per test image).
 
 ## Honest reading of these numbers
@@ -35,7 +35,7 @@ less reliable than a "crack detected" result.**
 ## Visual examples — not cherry-picked
 
 Nine example overlays are saved to
-[`artifacts/experiments/crack_segmentation_results/`](../artifacts/experiments/crack_segmentation_results/)
+`artifacts/experiments/crack_segmentation_results/` (regenerated, not committed)
 (green = correct crack prediction, red = false positive, blue = missed crack pixel), spanning
 the full quality range by design:
 

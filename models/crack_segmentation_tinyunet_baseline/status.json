@@ -1,0 +1,7 @@
+{
+  "status": "READY",
+  "updated_at": "2026-08-20T16:52:40.193735+00:00",
+  "experiment_name": "crack_segmentation_tinyunet_baseline",
+  "checkpoint_path": "artifacts\\experiments\\crack_segmentation_tinyunet_baseline\\best_model.pt",
+  "elapsed_seconds": 825.2
+}

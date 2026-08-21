@@ -3,7 +3,7 @@
 **Mechanism: `localStorage`, not IndexedDB.** The field-capture queue
 (`getQueue`/`setQueue`/`syncQueue` in `src/aeris/app/static/app.js`) reads and writes a single
 JSON array under the key `aeris-field-queue`. This is stated plainly here and in
-`docs/application_migration_plan.md` — no IndexedDB claim is made anywhere in this repository.
+no IndexedDB claim is made anywhere in this repository.
 
 ## Real test performed (this session, in an actual browser)
 

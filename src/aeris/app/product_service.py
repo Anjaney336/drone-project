@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import sqlite3
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
@@ -17,7 +19,6 @@ from aeris.app.product_models import (
     DroneCreate,
     HumanReviewCreate,
     MissionIngest,
-    ModelStatus,
     ProductMissionCreate,
     SyncRequest,
     TelemetryIngest,
@@ -205,19 +206,58 @@ DEMO_OBSERVATIONS = [
 ]
 
 
+# A verdict is an accountability record, not a mutable field. PENDING findings can go
+# anywhere; NEEDS_REINSPECTION and ESCALATED are waypoints that must still settle; and
+# CONFIRMED/REJECTED are terminal, so a settled verdict cannot be quietly overwritten by
+# a later caller. This mirrors the action state machine, which already refuses to reopen
+# a RESOLVED action.
+REVIEW_TRANSITIONS: dict[str, set[str]] = {
+    "PENDING": {"CONFIRMED", "REJECTED", "NEEDS_REINSPECTION", "ESCALATED"},
+    "NEEDS_REINSPECTION": {"CONFIRMED", "REJECTED", "ESCALATED"},
+    "ESCALATED": {"CONFIRMED", "REJECTED"},
+    "CONFIRMED": set(),
+    "REJECTED": set(),
+}
+
+
+ROOT = Path(__file__).resolve().parents[3]
+# Anchored to the repository root, not the working directory. A relative default meant
+# starting the server from a different directory silently opened a different database.
+DEFAULT_DB_PATH = ROOT / "artifacts" / "aeris_product.db"
+
+
 class ProductStore:
-    def __init__(self, path: Path = Path("artifacts/aeris_product.db")) -> None:
-        self.path = path
+    def __init__(self, path: Path = DEFAULT_DB_PATH) -> None:
+        self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._initialize()
 
-    def _connect(self) -> sqlite3.Connection:
+    @contextmanager
+    def _connect(self) -> Iterator[sqlite3.Connection]:
+        """Commit-or-rollback *and* close.
+
+        `with sqlite3.connect(...)` only manages the transaction — it does not close the
+        connection, so every request leaked a handle until garbage collection. Wrapping
+        it here keeps all 26 call sites unchanged while making the close explicit.
+        """
         connection = sqlite3.connect(self.path)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA foreign_keys = ON")
-        return connection
+        try:
+            with connection:
+                yield connection
+        finally:
+            connection.close()
 
     def _initialize(self) -> None:
+        # WAL lets readers run concurrently with a writer. FastAPI serves sync endpoints
+        # from a threadpool, so without it concurrent requests hit "database is locked".
+        # The setting is persistent per database file, so it only needs setting once.
+        connection = sqlite3.connect(self.path)
+        try:
+            connection.execute("PRAGMA journal_mode=WAL")
+        finally:
+            connection.close()
         with self._connect() as db:
             db.executescript(
                 """
@@ -296,16 +336,36 @@ class ProductStore:
                 );
                 """
             )
-            mission_columns = {row[1] for row in db.execute("PRAGMA table_info(missions)").fetchall()}
+            mission_columns = {
+                row[1] for row in db.execute("PRAGMA table_info(missions)").fetchall()
+            }
             if "domain" not in mission_columns:
                 db.execute(
                     "ALTER TABLE missions ADD COLUMN domain TEXT NOT NULL DEFAULT 'infrastructure'"
                 )
             if "drone_id" not in mission_columns:
                 db.execute("ALTER TABLE missions ADD COLUMN drone_id TEXT")
-            finding_columns = {row[1] for row in db.execute("PRAGMA table_info(ai_findings)").fetchall()}
+            finding_columns = {
+                row[1] for row in db.execute("PRAGMA table_info(ai_findings)").fetchall()
+            }
             if "regions" not in finding_columns:
                 db.execute("ALTER TABLE ai_findings ADD COLUMN regions TEXT")
+            reliability_columns = {
+                row[1]
+                for row in db.execute(
+                    "PRAGMA table_info(mission_reliability_assessments)"
+                ).fetchall()
+            }
+            if "unavailable_components" not in reliability_columns:
+                db.execute(
+                    "ALTER TABLE mission_reliability_assessments "
+                    "ADD COLUMN unavailable_components TEXT NOT NULL DEFAULT '{}'"
+                )
+            if "weights_used" not in reliability_columns:
+                db.execute(
+                    "ALTER TABLE mission_reliability_assessments "
+                    "ADD COLUMN weights_used TEXT NOT NULL DEFAULT '{}'"
+                )
             count = db.execute("SELECT COUNT(*) FROM assets").fetchone()[0]
             if not count:
                 self._seed(db)
@@ -508,6 +568,25 @@ class ProductStore:
         )
 
     @staticmethod
+    def _origin_summary(rows: list[dict]) -> tuple[str, dict[str, int]]:
+        """Describe what an aggregate is actually made of.
+
+        Aggregates used to hard-code `origin: demonstration` while counting every row
+        in the table, which mislabelled a mix of seeded and user data as pure demo
+        data. Reports the single origin when the rows are homogeneous, and "mixed"
+        with a per-origin breakdown when they are not.
+        """
+        counts: dict[str, int] = {}
+        for row in rows:
+            origin = str(row.get("origin") or "unavailable")
+            counts[origin] = counts.get(origin, 0) + 1
+        if not counts:
+            return "unavailable", {}
+        if len(counts) == 1:
+            return next(iter(counts)), counts
+        return "mixed", counts
+
+    @staticmethod
     def _rows(rows: list[sqlite3.Row]) -> list[dict[str, Any]]:
         return [dict(row) for row in rows]
 
@@ -528,6 +607,9 @@ class ProductStore:
                 ).fetchall()
             )
             actions = self.priority_queue(limit=5)
+            summary_origin, origin_counts = self._origin_summary(
+                self._rows(db.execute("SELECT origin FROM assets").fetchall())
+            )
             return {
                 "metrics": {
                     "total_assets": totals["total"],
@@ -539,7 +621,8 @@ class ProductStore:
                 },
                 "recent_findings": findings,
                 "action_queue": actions,
-                "origin": DataOrigin.DEMONSTRATION,
+                "origin": summary_origin,
+                "origins": origin_counts,
                 "source": DEMO_SOURCE,
                 "timestamp": DEMO_TIMESTAMP,
             }
@@ -816,6 +899,7 @@ class ProductStore:
                     params,
                 ).fetchall()
             )
+        region_origin, region_origin_counts = self._origin_summary(assets)
         return {
             "district": district or "All districts",
             "asset_count": len(assets),
@@ -827,7 +911,8 @@ class ProductStore:
             "priority_distribution": counts,
             "recurring_observations": observation_rows,
             "assets": assets,
-            "origin": DataOrigin.DEMONSTRATION,
+            "origin": region_origin,
+            "origins": region_origin_counts,
             "source": DEMO_SOURCE,
             "timestamp": DEMO_TIMESTAMP,
         }
@@ -931,7 +1016,9 @@ class ProductStore:
                 raise KeyError(f"Mission {mission_id} was not found")
             for record in records:
                 if record.mission_id != mission_id:
-                    raise ValueError("All telemetry records in one ingest call must share a mission_id")
+                    raise ValueError(
+                        "All telemetry records in one ingest call must share a mission_id"
+                    )
                 db.execute(
                     "INSERT INTO telemetry_records VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     (
@@ -968,7 +1055,11 @@ class ProductStore:
             assessment_id = f"REL-{uuid4().hex[:8].upper()}"
             when = utc_now()
             db.execute(
-                "INSERT INTO mission_reliability_assessments VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO mission_reliability_assessments ("
+                "assessment_id, mission_id, level, score, components, weighted_components, "
+                "formula, reasons, is_simulation, sample_count, timestamp, "
+                "unavailable_components, weights_used"
+                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 (
                     assessment_id,
                     mission_id,
@@ -981,9 +1072,16 @@ class ProductStore:
                     int(result["is_simulation"]),
                     result["sample_count"],
                     when,
+                    json.dumps(result.get("unavailable_components", {})),
+                    json.dumps(result.get("weights_used", {})),
                 ),
             )
-        return {**result, "assessment_id": assessment_id, "mission_id": mission_id, "timestamp": when}
+        return {
+            **result,
+            "assessment_id": assessment_id,
+            "mission_id": mission_id,
+            "timestamp": when,
+        }
 
     def get_mission_reliability(self, mission_id: str) -> dict:
         with self._connect() as db:
@@ -999,12 +1097,20 @@ class ProductStore:
                 "score": None,
                 "reasons": ["No telemetry has been ingested for this mission yet."],
                 "components": {},
+                "unavailable_components": {},
+                "weighted_components": {},
+                "weights_used": {},
                 "is_simulation": False,
                 "sample_count": 0,
             }
         result = dict(row)
-        result["components"] = json.loads(result["components"])
-        result["weighted_components"] = json.loads(result["weighted_components"])
+        for field in (
+            "components",
+            "weighted_components",
+            "unavailable_components",
+            "weights_used",
+        ):
+            result[field] = json.loads(result.get(field) or "{}")
         result["reasons"] = json.loads(result["reasons"])
         result["is_simulation"] = bool(result["is_simulation"])
         return result
@@ -1048,13 +1154,17 @@ class ProductStore:
     @staticmethod
     def _attach_interpretation(finding: dict) -> dict:
         finding.update(
-            interpret_finding(finding["label"], finding["confidence"], finding["mission_reliability"])
+            interpret_finding(
+                finding["label"], finding["confidence"], finding["mission_reliability"]
+            )
         )
         return finding
 
     def get_ai_finding(self, finding_id: str) -> dict:
         with self._connect() as db:
-            row = db.execute("SELECT * FROM ai_findings WHERE finding_id=?", (finding_id,)).fetchone()
+            row = db.execute(
+                "SELECT * FROM ai_findings WHERE finding_id=?", (finding_id,)
+            ).fetchone()
             if not row:
                 raise KeyError(f"Finding {finding_id} was not found")
             result = self._parse_finding(dict(row))
@@ -1074,7 +1184,9 @@ class ProductStore:
             params.append(mission_id)
         query += " ORDER BY timestamp DESC"
         with self._connect() as db:
-            return [self._parse_finding(r) for r in self._rows(db.execute(query, params).fetchall())]
+            return [
+                self._parse_finding(r) for r in self._rows(db.execute(query, params).fetchall())
+            ]
 
     def review_queue(self) -> list[dict]:
         """Findings awaiting human review, annotated with mission reliability so a
@@ -1090,17 +1202,37 @@ class ProductStore:
                     ).fetchall()
                 )
             ]
+        # One lookup for every distinct mission, not one per finding. This used to call
+        # get_mission_reliability() per row, and each call opened its own connection, so
+        # a queue of 100 findings meant 100 connections.
+        reliability = {
+            mission_id: self.get_mission_reliability(mission_id)
+            for mission_id in {row["mission_id"] for row in rows}
+        }
         for row in rows:
-            row["mission_reliability"] = self.get_mission_reliability(row["mission_id"])
+            row["mission_reliability"] = reliability[row["mission_id"]]
             self._attach_interpretation(row)
         return rows
 
     def submit_human_review(self, finding_id: str, request: HumanReviewCreate) -> dict:
         with self._connect() as db:
-            if not db.execute(
-                "SELECT 1 FROM ai_findings WHERE finding_id=?", (finding_id,)
-            ).fetchone():
+            row = db.execute(
+                "SELECT review_status FROM ai_findings WHERE finding_id=?", (finding_id,)
+            ).fetchone()
+            if not row:
                 raise KeyError(f"Finding {finding_id} was not found")
+            current = row["review_status"]
+            allowed = REVIEW_TRANSITIONS.get(current, set())
+            if request.verdict not in allowed:
+                if not allowed:
+                    raise ValueError(
+                        f"Finding {finding_id} is already {current}; a settled verdict cannot "
+                        f"be changed. Raise a new finding if the asset needs re-inspection."
+                    )
+                raise ValueError(
+                    f"Cannot move finding {finding_id} from {current} to {request.verdict}. "
+                    f"Allowed from {current}: {', '.join(sorted(allowed))}."
+                )
             db.execute(
                 "INSERT INTO human_reviews VALUES (?,?,?,?,?,?)",
                 (

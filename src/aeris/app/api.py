@@ -1,16 +1,17 @@
 from __future__ import annotations
 
 import json
+import os
+import uuid
 from pathlib import Path
 
-import uuid
-
 import numpy as np
-from fastapi import FastAPI, HTTPException, UploadFile
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, HTTPException, Request, UploadFile
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
+from aeris.app.model_registry import REGISTRY, registry_status
 from aeris.app.product_models import (
     ActionCreate,
     ActionUpdate,
@@ -23,9 +24,7 @@ from aeris.app.product_models import (
     SyncRequest,
     TelemetryIngest,
 )
-from aeris.app.model_registry import REGISTRY, registry_status
 from aeris.app.product_service import ProductStore
-from aeris.models import DataOrigin
 from aeris.app.schemas import (
     MissionArtifacts,
     MissionCreate,
@@ -36,10 +35,33 @@ from aeris.app.schemas import (
     MissionTelemetry,
 )
 from aeris.app.service import MissionStore
+from aeris.models import DataOrigin
 
 app = FastAPI(title="AERIS Infrastructure Intelligence API", version="1.0.0")
 store = MissionStore()
-product_store = ProductStore()
+# AERIS_DB_PATH lets a deployment (or the test suite) place the database somewhere other
+# than the repository's artifacts/ directory.
+_DB_PATH = os.environ.get("AERIS_DB_PATH")
+product_store = ProductStore(Path(_DB_PATH)) if _DB_PATH else ProductStore()
+
+# Optional shared-secret guard for state-changing requests. Unset by default so the
+# demo workflow needs no setup, but the absence of a guard is *reported* by /health
+# rather than left implicit — an unauthenticated deployment should be visibly
+# unauthenticated. This is a deployment guard, not user authentication: it does not
+# identify a reviewer (see docs/hazard_log.md).
+API_TOKEN = os.environ.get("AERIS_API_TOKEN") or None
+MUTATING_METHODS = {"POST", "PATCH", "PUT", "DELETE"}
+
+
+@app.middleware("http")
+async def require_token_for_mutations(request: Request, call_next):
+    if API_TOKEN and request.method in MUTATING_METHODS:
+        if request.headers.get("X-AERIS-Token") != API_TOKEN:
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Missing or invalid X-AERIS-Token header"},
+            )
+    return await call_next(request)
 
 
 @app.get("/api/v1/health")
@@ -51,7 +73,14 @@ def health() -> dict:
         db_ok = True
     except Exception:  # noqa: BLE001 - health check must not raise, just report
         db_ok = False
-    return {"status": "ok" if db_ok else "degraded", "service": "aeris-api", "database": "ok" if db_ok else "unavailable"}
+    return {
+        "status": "ok" if db_ok else "degraded",
+        "service": "aeris-api",
+        "database": "ok" if db_ok else "unavailable",
+        "write_protection": "token" if API_TOKEN else "none",
+    }
+
+
 BENCHMARK_PATH = Path("artifacts/benchmark.json")
 SYNTHETIC_VALIDATION_PATH = Path("artifacts/synthetic_data_validation.json")
 SYNTHETIC_HELD_OUT_PATH = Path("data/processed/synthetic/held_out.npz")
@@ -326,6 +355,22 @@ class AnalyzeRequest(BaseModel):
     model_key: str = "infrastructure_detection"
 
 
+def _media_origin(image_path: str) -> DataOrigin:
+    """A finding inherits the provenance of the medium it was computed from.
+
+    A model inference over a photograph a user uploaded is not a measurement, and
+    tagging it MEASURED would make it indistinguishable from instrumented sensor data
+    in every downstream query.
+    """
+    normalised = image_path.replace("\\", "/").lstrip("./")
+    if normalised.startswith("data/uploads/"):
+        return DataOrigin.USER_UPLOADED
+    if normalised.startswith("data/demo/"):
+        return DataOrigin.DEMONSTRATION
+    # data/raw and data/processed hold the training and evaluation corpora.
+    return DataOrigin.PUBLIC_BENCHMARK
+
+
 @app.post("/api/v1/missions/{mission_id}/analyze")
 def analyze_mission_image(mission_id: str, request: AnalyzeRequest) -> list[dict]:
     _product_call(lambda: product_store.get_mission(mission_id))
@@ -350,7 +395,7 @@ def analyze_mission_image(mission_id: str, request: AnalyzeRequest) -> list[dict
                 model_version=prediction.model_version,
                 source_media=request.image_path,
                 regions=prediction.regions,
-                origin=DataOrigin.MEASURED,
+                origin=_media_origin(request.image_path),
                 source="aeris.model_registry",
             )
         )
@@ -360,21 +405,53 @@ def analyze_mission_image(mission_id: str, request: AnalyzeRequest) -> list[dict
 
 ROOT = Path(__file__).resolve().parents[3]
 UPLOAD_ROOT = ROOT / "data" / "uploads"
-MEDIA_ROOTS = [ROOT / "data" / "raw", ROOT / "data" / "processed", ROOT / "data" / "demo", UPLOAD_ROOT]
+MEDIA_ROOTS = [
+    ROOT / "data" / "raw",
+    ROOT / "data" / "processed",
+    ROOT / "data" / "demo",
+    UPLOAD_ROOT,
+]
 ALLOWED_UPLOAD_TYPES = {"image/jpeg", "image/png"}
 MAX_UPLOAD_BYTES = 15 * 1024 * 1024
+UPLOAD_CHUNK_BYTES = 1024 * 1024
+# A declared Content-Type is whatever the client typed. These are the real signatures.
+IMAGE_MAGIC = {
+    "image/jpeg": (b"\xff\xd8\xff",),
+    "image/png": (b"\x89PNG\r\n\x1a\n",),
+}
 
 
 @app.get("/api/v1/media")
 def get_media(path: str) -> FileResponse:
-    """Serves mission-referenced imagery for display. Restricted to data/ subdirectories
-    to prevent path traversal outside the dataset roots."""
+    """Serves mission-referenced imagery for display, restricted to the dataset roots."""
     candidate = (ROOT / path).resolve()
-    if not any(str(candidate).startswith(str(root.resolve())) for root in MEDIA_ROOTS):
+    # Path.is_relative_to compares path components. The previous string-prefix check
+    # accepted any sibling whose name merely started with a root's name, so a
+    # `data/demolition/` directory satisfied the `data/demo` root.
+    if not any(candidate.is_relative_to(root.resolve()) for root in MEDIA_ROOTS):
         raise HTTPException(status_code=403, detail="Path is outside permitted media roots")
     if not candidate.is_file():
         raise HTTPException(status_code=404, detail="Media file not found")
     return FileResponse(candidate)
+
+
+async def _read_within_limit(file: UploadFile, limit: int) -> bytes:
+    """Read an upload in chunks, aborting as soon as it exceeds the limit.
+
+    Reading the whole body first and checking its length afterwards means the limit
+    bounds nothing: an arbitrarily large upload is fully buffered in memory before it
+    is rejected.
+    """
+    chunks: list[bytes] = []
+    total = 0
+    while chunk := await file.read(UPLOAD_CHUNK_BYTES):
+        total += len(chunk)
+        if total > limit:
+            raise HTTPException(
+                status_code=413, detail=f"File exceeds {limit // (1024 * 1024)}MB limit"
+            )
+        chunks.append(chunk)
+    return b"".join(chunks)
 
 
 @app.post("/api/v1/missions/{mission_id}/media")
@@ -384,10 +461,18 @@ async def upload_mission_media(mission_id: str, file: UploadFile) -> dict:
     returned relative path is usable directly by /analyze and /media."""
     _product_call(lambda: product_store.get_mission(mission_id))
     if file.content_type not in ALLOWED_UPLOAD_TYPES:
-        raise HTTPException(status_code=415, detail=f"Unsupported content type: {file.content_type}. Allowed: {sorted(ALLOWED_UPLOAD_TYPES)}")
-    body = await file.read()
-    if len(body) > MAX_UPLOAD_BYTES:
-        raise HTTPException(status_code=413, detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024*1024)}MB limit")
+        raise HTTPException(
+            status_code=415,
+            detail=f"Unsupported content type: {file.content_type}. "
+            f"Allowed: {sorted(ALLOWED_UPLOAD_TYPES)}",
+        )
+    body = await _read_within_limit(file, MAX_UPLOAD_BYTES)
+    if not body.startswith(IMAGE_MAGIC[file.content_type]):
+        raise HTTPException(
+            status_code=415,
+            detail=f"File content is not a valid {file.content_type} image, "
+            "regardless of the declared content type.",
+        )
     ext = ".jpg" if file.content_type == "image/jpeg" else ".png"
     mission_dir = UPLOAD_ROOT / mission_id
     mission_dir.mkdir(parents=True, exist_ok=True)
@@ -414,9 +499,7 @@ async def upload_mission_telemetry(mission_id: str, file: UploadFile) -> dict:
     from aeris.app.telemetry_import import parse_telemetry_csv, parse_telemetry_json
 
     _product_call(lambda: product_store.get_mission(mission_id))
-    body = await file.read()
-    if len(body) > MAX_UPLOAD_BYTES:
-        raise HTTPException(status_code=413, detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024*1024)}MB limit")
+    body = await _read_within_limit(file, MAX_UPLOAD_BYTES)
     name = (file.filename or "").lower()
     try:
         if name.endswith(".json"):
@@ -452,7 +535,11 @@ def sample_telemetry_csv() -> dict:
             "1,88,0.79,9,0.90,0\n"
             "2,84,0.52,6,0.85,1\n"
         ),
-        "note": "Only timestamp is required. Every other column is optional — omit any you don't have; AERIS will mark that dimension NOT AVAILABLE rather than assuming a value.",
+        "note": (
+            "Only timestamp is required. Every other column is optional — omit any you "
+            "don't have; AERIS will mark that dimension NOT AVAILABLE rather than "
+            "assuming a value."
+        ),
     }
 
 
@@ -466,13 +553,23 @@ def product_frontend():
     return FileResponse(STATIC_PATH / "index.html")
 
 
+# 8501 is AERIS's one canonical port, matching README.md, Dockerfile, .env.example and
+# every demo script. AERIS_HOST/AERIS_PORT override it for a non-default deployment.
+DEFAULT_HOST = os.environ.get("AERIS_HOST", "127.0.0.1")
+DEFAULT_PORT = int(os.environ.get("AERIS_PORT", "8501"))
+
+
 def run() -> None:
     import uvicorn
 
-    uvicorn.run("aeris.app.api:app", host="127.0.0.1", port=8000)
+    uvicorn.run(
+        "aeris.app.api:app",
+        host=DEFAULT_HOST,
+        port=DEFAULT_PORT,
+        log_level=os.environ.get("AERIS_LOG_LEVEL", "info").lower(),
+    )
 
 
-def run_product() -> None:
-    import uvicorn
-
-    uvicorn.run("aeris.app.api:app", host="127.0.0.1", port=8501)
+# Retained because pyproject exposes it as the `aeris-product` console script; both
+# entry points serve the same app on the same port.
+run_product = run

@@ -6,10 +6,9 @@ from pydantic import ValidationError
 
 from aeris.app import api
 from aeris.app.api import app
-from aeris.app.dashboard import (
+from aeris.app.plain_language import (
     UNAVAILABLE,
     fault_summary,
-    friendly_error,
     plain_safety_status,
     show,
     unavailable_explanation,
@@ -48,7 +47,6 @@ def test_unknown_api_fields_are_rejected():
 def test_dashboard_plain_language_contract():
     assert plain_safety_status("NORMAL")[0] == "✅ Safe"
     assert "Action recommended" in plain_safety_status("GEOFENCE_RISK")[0]
-    assert friendly_error.__name__ == "friendly_error"
     assert "does not compute separate IMU trust" in unavailable_explanation({}, "imu")
     assert fault_summary({}, [{"injected_fault": "synthetic_gnss_drift_high"}]).endswith(
         "(earlier; now inactive)"
@@ -70,10 +68,23 @@ def test_benchmark_endpoint_reads_only_authoritative_artifact(tmp_path, monkeypa
 
 
 def test_synthetic_preview_is_explicitly_tagged():
+    """The origin assertion must not pass vacuously.
+
+    data/processed is gitignored, so on a fresh clone this endpoint returns an empty
+    record list and `all(...)` over it is trivially true — the test asserted nothing.
+    It now requires the DATA UNAVAILABLE contract when the file is absent, and only
+    checks per-row provenance when there are actually rows to check.
+    """
     response = TestClient(app).get("/synthetic-data-preview")
     assert response.status_code == 200
     payload = response.json()
     assert payload["provenance"] == "synthetic"
+    if not api.SYNTHETIC_HELD_OUT_PATH.exists():
+        assert payload["data_status"] == "DATA UNAVAILABLE"
+        assert payload["records"] == []
+        return
+    assert payload["data_status"] == "AVAILABLE"
+    assert payload["records"], "held-out file exists but no records were returned"
     assert all(row["origin"] in {"synthetic", "synthetic_fault"} for row in payload["records"])
 
 

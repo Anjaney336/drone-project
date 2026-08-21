@@ -33,8 +33,9 @@ data/telemetry/**
 !data/telemetry/.gitkeep
 data/uploads/**
 !data/uploads/.gitkeep
-models/**/*.pt
-models/**/*.onnx
+# models/ is intentionally NOT ignored: it holds published checkpoints (produced by
+# scripts/publish_model.py) so that cloning the repository is enough to run real
+# inference. Raw training runs stay under the gitignored artifacts/ directory.
 dashboard/node_modules/
 .legacy_backup/
 # Quarantined: unlabeled light-field dataset, origin undetermined — see docs/dataset_audit.md.

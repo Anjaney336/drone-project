@@ -27,7 +27,10 @@ def test_seeded_product_dataset_is_reproducible_and_tagged(tmp_path):
         assert all(row["origin"] == "demonstration" and row["source"] for row in first[collection])
 
 
-def test_priority_scoring_is_explainable_and_conservative_without_confidence():
+def test_priority_scoring_excludes_unknown_confidence_rather_than_inventing_one():
+    """An unmeasured confidence used to be substituted with a neutral 0.5, which let a
+    value nobody measured move an asset up or down the queue. It is now dropped and the
+    remaining weights renormalise — the same rule the reliability engine follows."""
     result = assess_priority(
         severity=0.9,
         confidence=None,
@@ -37,9 +40,20 @@ def test_priority_scoring_is_explainable_and_conservative_without_confidence():
         geographic_impact=0.7,
     )
     assert result.level == "CRITICAL"
-    assert result.components["confidence"] == 0.5
-    assert "confidence unavailable" in " ".join(result.factors).lower()
-    assert "0.30×severity" in result.formula
+    assert "confidence" not in result.components
+    assert "not available" in " ".join(result.factors).lower()
+    assert "confidence" not in result.formula
+
+    scored = assess_priority(
+        severity=0.9,
+        confidence=0.9,
+        criticality=0.95,
+        recurrence=3,
+        trend=0.8,
+        geographic_impact=0.7,
+    )
+    assert "confidence" in scored.components
+    assert "×confidence" in scored.formula
 
 
 def test_mission_ingestion_generates_traceable_priority(tmp_path):

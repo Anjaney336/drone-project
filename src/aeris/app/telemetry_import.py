@@ -4,7 +4,12 @@ Adapts to whatever columns are actually present — a file with only a battery
 column produces rows with only battery_percent set; nothing is invented for
 missing fields. Column names are matched case-insensitively against known
 aliases so a real drone log's slightly different header names still work.
+
+Rows are tagged USER_UPLOADED, not FIELD. A file a user attaches through the
+browser is not a measurement from an instrumented field deployment, and the two
+must stay structurally distinguishable in the database.
 """
+
 from __future__ import annotations
 
 import csv
@@ -49,7 +54,9 @@ def _coerce(field: str, raw: str | None):
         return None
 
 
-def parse_telemetry_csv(content: bytes, mission_id: str, source: str) -> tuple[list[TelemetryIngest], list[str]]:
+def parse_telemetry_csv(
+    content: bytes, mission_id: str, source: str
+) -> tuple[list[TelemetryIngest], list[str]]:
     """Returns (rows, recognized_columns). Raises ValueError on structurally unusable input."""
     text = content.decode("utf-8-sig", errors="replace")
     reader = csv.DictReader(io.StringIO(text))
@@ -69,7 +76,11 @@ def parse_telemetry_csv(content: bytes, mission_id: str, source: str) -> tuple[l
 
     rows: list[TelemetryIngest] = []
     for index, row in enumerate(reader):
-        kwargs: dict = {"mission_id": mission_id, "origin": DataOrigin.FIELD, "source": source}
+        kwargs: dict = {
+            "mission_id": mission_id,
+            "origin": DataOrigin.USER_UPLOADED,
+            "source": source,
+        }
         for field, column_name in column_map.items():
             value = _coerce(field, row.get(column_name))
             if value is not None:
@@ -80,7 +91,9 @@ def parse_telemetry_csv(content: bytes, mission_id: str, source: str) -> tuple[l
     return rows, sorted(column_map.keys())
 
 
-def parse_telemetry_json(content: bytes, mission_id: str, source: str) -> tuple[list[TelemetryIngest], list[str]]:
+def parse_telemetry_json(
+    content: bytes, mission_id: str, source: str
+) -> tuple[list[TelemetryIngest], list[str]]:
     data = json.loads(content.decode("utf-8"))
     if not isinstance(data, list):
         raise ValueError("JSON telemetry file must be a list of records")
@@ -89,11 +102,21 @@ def parse_telemetry_json(content: bytes, mission_id: str, source: str) -> tuple[
     for index, record in enumerate(data):
         if not isinstance(record, dict):
             raise ValueError(f"Record {index} is not an object")
-        kwargs = {"mission_id": mission_id, "origin": DataOrigin.FIELD, "source": source}
-        for field in COLUMN_ALIASES:
-            if field in record and record[field] is not None:
-                kwargs[field] = record[field]
-                seen_fields.add(field)
-        kwargs.setdefault("timestamp", record.get("timestamp", float(index)))
+        # Resolve aliases exactly as the CSV path does. Matching only canonical names
+        # here would silently drop a `battery` or `gps` key that the same file would
+        # have been read from in CSV form.
+        kwargs: dict = {
+            "mission_id": mission_id,
+            "origin": DataOrigin.USER_UPLOADED,
+            "source": source,
+        }
+        for field, aliases in COLUMN_ALIASES.items():
+            found = _find_column(list(record), aliases)
+            if found is None or record[found] is None:
+                continue
+            value = record[found] if field != "packet_loss" else bool(record[found])
+            kwargs[field] = value
+            seen_fields.add(field)
+        kwargs.setdefault("timestamp", float(index))
         rows.append(TelemetryIngest(**kwargs))
     return rows, sorted(seen_fields)

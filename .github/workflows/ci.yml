@@ -8,14 +8,23 @@ on:
 jobs:
   test-lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.lock
+      # requirements.lock carries its own --extra-index-url for the CPU-only torch
+      # wheels, so this install never pulls a multi-gigabyte CUDA build.
       - run: python -m pip install -r requirements.lock
       - run: python -m pip install --no-build-isolation --no-deps -e .
       - run: ruff check .
+      - run: ruff format --check .
       - run: pytest -q
+      # The demonstration dataset's SHA-256 is published in docs/dataset.md as an
+      # integrity claim; this fails the build if the committed file drifts from what
+      # the generator produces.
+      - run: python scripts/export_demo_dataset.py --check
       - run: aeris-benchmark --seed 7 --trials 1 --output artifacts/benchmark-smoke.json

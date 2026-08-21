@@ -6,8 +6,7 @@ urgent is it?" (that's `priority.py`, unchanged). Implementation:
 
 ## Why this exists, and what it reuses
 
-Per [`docs/migration_audit.md`](migration_audit.md) and
-[`docs/application_migration_plan.md`](application_migration_plan.md), the counter-drone-era
+The counter-drone-era
 `aeris.autonomy.safety.risk.combine_risk`/`RiskWeights` pattern — a generic weighted decomposition
 with named components, each independently inspectable — is directly reused as `_combine` in the
 reliability module. The dimensions themselves are new (navigation/sensor/telemetry/battery/
@@ -33,16 +32,34 @@ score = 100 × (0.30×navigation + 0.20×sensor_consistency + 0.20×telemetry_co
 HIGH:   score ≥ 75
 MEDIUM: 50 ≤ score < 75
 LOW:    score < 50
-UNKNOWN: no telemetry recorded at all
+UNKNOWN: no telemetry recorded, or no substantive dimension assessable
 ```
+
+## Missing data is NOT AVAILABLE, never a stand-in value
+
+A dimension with no telemetry behind it is reported in `unavailable_components` with the
+reason it could not be assessed, and is **excluded from the score**. The remaining weights
+are renormalised to sum to 1.0 and returned as `weights_used`, so a mission assessed on two
+dimensions is scored out of those two rather than being credited or penalised for telemetry
+it never carried.
+
+No dimension is ever given a neutral or optimistic stand-in, because a score computed from
+invented inputs is indistinguishable from one computed from real measurements.
 
 | Dimension | Signal used | When data is missing |
 |---|---|---|
-| Navigation | Mean NIS (`normalized_innovation_squared`) if present, else mean `gnss_quality`, else neutral 0.5 | Reason states explicitly that no GNSS/consistency data was available; never silently scored as good |
-| Sensor consistency | Mean `camera_confidence` | Same — neutral 0.5 with an explicit reason |
-| Telemetry continuity | Count of `packet_loss` events + delays over 0.5s, as a fraction of all records | Zero gaps scores 1.0 and says so explicitly |
-| Battery/power | Minimum `battery_percent` observed during the mission (worst case, not average) | Neutral 0.5 with explicit reason if never reported |
-| Data completeness | Fraction of the four tracked fields actually present across all records | Always computable; this is the one dimension that can legitimately be low without being "missing" |
+| Navigation | Mean NIS (`normalized_innovation_squared`) if present, else mean `gnss_quality` | NOT AVAILABLE — excluded from the score |
+| Sensor consistency | Mean `camera_confidence` | NOT AVAILABLE — excluded from the score |
+| Telemetry continuity | Fraction of *reporting* records showing `packet_loss` or delay over 0.5s | NOT AVAILABLE — the absence of a `packet_loss` column is not evidence of an unbroken stream, so it must not score as one |
+| Battery/power | Minimum `battery_percent` observed during the mission (worst case, not average) | NOT AVAILABLE — excluded from the score |
+| Data completeness | Fraction of the four tracked fields actually present across all records | Always computable, but never scored alone — see below |
+
+`data_completeness` describes how much telemetry arrived, not whether the flight was sound.
+It cannot by itself justify a reliability verdict, so at least one of navigation, sensor
+consistency, telemetry continuity or battery must be assessable before any score is
+produced. A file carrying only timestamps therefore returns **UNKNOWN with a null score**,
+listing all five dimensions as NOT AVAILABLE — not a middling number that looks like a
+measurement.
 
 Every assessment returns a `reasons` list — the literal sentences shown in the UI — not just the
 numeric components, matching the requirement that the system always explain **why**, e.g.:
@@ -51,13 +68,13 @@ numeric components, matching the requirement that the system always explain **wh
 MISSION RELIABILITY: LOW (39.0)
 ⚠ GNSS/navigation consistency degraded (1 innovation excursion detected)
 ✓ Camera data complete
-⚠ 2 telemetry gap(s)/excess-delay event(s) detected
+⚠ 2 of 40 reporting record(s) showed packet loss or delay above 0.5s
 ✓ Battery remained within expected operating range
 Data completeness: 88% of tracked telemetry fields present across 2 record(s)
 ```
 (This is real output from `python -c "..."` exercising `ProductStore.ingest_telemetry` against two
 hand-constructed telemetry rows — see the smoke test in
-[`artifacts/product_validation_report.md`](../artifacts/product_validation_report.md) — not a
+`artifacts/product_validation_report.md` (regenerated, not committed) — not a
 mocked example.)
 
 ## Real vs. simulated telemetry
