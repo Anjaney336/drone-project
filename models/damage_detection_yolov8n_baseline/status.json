@@ -1,0 +1,7 @@
+{
+  "status": "READY",
+  "updated_at": "2026-08-20T16:38:26.335280+00:00",
+  "experiment_name": "damage_detection_yolov8n_baseline",
+  "checkpoint_path": "artifacts/experiments/damage_detection_yolov8n_baseline/weights/best.pt",
+  "note": "status.json backfilled after the fact: this run was launched before status.json tracking was added to train.py mid-session; final_metrics in artifacts/experiments/damage_detection_yolov8n_baseline.json are the real test-split result from this same run, not fabricated."
+}
